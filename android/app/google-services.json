@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "662856376755",
+    "project_id": "flexbros-e3945",
+    "storage_bucket": "flexbros-e3945.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662856376755:android:6c6b64a9c03fb14a0f2bc6",
+        "android_client_info": {
+          "package_name": "com.flexbros"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662856376755-rpg3i4gvvihg8uvap2357ga5q0grim8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6_7zn4m1VEH0OYfvJJF_sbV1YYcH1tDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662856376755-rpg3i4gvvihg8uvap2357ga5q0grim8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
