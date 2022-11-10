@@ -62,6 +62,8 @@ export class Set {
 }
 
 
+const userID = "KznJACOrQoOeBo4SrZywbPc6KE72"
+
 const sets1 = [new Set(8, 105), new Set(8, 105), new Set(8, 105)]
 const sets2 = [new Set(8, 70), new Set(8, 70), new Set(8, 70)]
 const sets3 = [new Set(8, 80), new Set(8, 80), new Set(8, 80)]
@@ -72,18 +74,18 @@ const h2 = [new HistoryItem("11/1", "", sets2)]
 const h3 = [new HistoryItem("11/1", "", sets3)]
 const h4 = [new HistoryItem("11/1", "", sets4)]
 
-const e1 = new Exercise("Bench", "A4A2aPnIz2VH39FsbGkPwZnzYM43", h1);
-const e2 = new Exercise("ShoulderPress", "A4A2aPnIz2VH39FsbGkPwZnzYM43", h2);
+const e1 = new Exercise("Bench", userID, h1);
+const e2 = new Exercise("ShoulderPress", userID, h2);
 
 const e = [e1, e2]
 
-const p1 = new Exercise("Rows", "A4A2aPnIz2VH39FsbGkPwZnzYM43", h3)
-const p2 = new Exercise("Pull Ups", "A4A2aPnIz2VH39FsbGkPwZnzYM43", h4)
+const p1 = new Exercise("Rows", userID, h3)
+const p2 = new Exercise("Pull Ups", userID, h4)
 
 const p = [p1, p2]
 
-const w1 = new Workout("Push", "A4A2aPnIz2VH39FsbGkPwZnzYM43", ['MON', 'THU'], e)
-const w2 = new Workout("Pull", "A4A2aPnIz2VH39FsbGkPwZnzYM43", ['TUE', 'FRI'], p)
+const w1 = new Workout("Push", userID, ['MON', 'THU'], e)
+const w2 = new Workout("Pull", userID, ['TUE', 'FRI'], p)
 
 const w = [w1, w2]
-export const example = new Routine("brosplit", "A4A2aPnIz2VH39FsbGkPwZnzYM43", w)
+export const example = new Routine("brosplit", userID, w)
