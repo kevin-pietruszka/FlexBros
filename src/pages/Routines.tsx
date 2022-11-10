@@ -3,6 +3,10 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Routines.css';
 
 const Routines: React.FC = () => {
+
+  // TODO
+  // Read and display routines from user id
+  //   call readRoutines from db.ts with user id   
   
   return (
     <IonPage>
