@@ -18,7 +18,7 @@ export async function getsUsersRoutines(userID: string) {
 
     const routineSnap = await getDocs(routineQuery);
     routineSnap.forEach( (doc) => {
-        routines.push(doc.id);
+        routines.push(doc.data().routine_name);
     });
 
     return routines;
@@ -33,7 +33,7 @@ export async function readRoutine(routineName: string, userID: string) {
 
     let x = await getsUsersRoutines(userID);
     if (routineName in x) {
-        return "Routine already exists"
+        return null;
     }
 
     // Get routine collection
