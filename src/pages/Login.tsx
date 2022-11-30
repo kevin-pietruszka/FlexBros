@@ -1,5 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import { useState } from 'react';
+import './Global.css'
 
 /* Firebase imports */
 import { initializeApp } from "firebase/app";

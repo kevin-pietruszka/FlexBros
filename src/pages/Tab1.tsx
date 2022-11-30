@@ -3,6 +3,7 @@ import ExploreContainer from '../components/ExploreContainer';
 import { Routine, Workout, Exercise } from "../routine"
 import { getsUsersRoutines, readRoutine } from "../db"
 import React, { useState, useEffect } from 'react';
+import "./Global.css"
 
 const uid = "KznJACOrQoOeBo4SrZywbPc6KE72"
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
