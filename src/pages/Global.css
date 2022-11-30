@@ -1,6 +1,4 @@
 /* ion-content {
-    --background: #FFFFFF;
-    --color: #000;
 }
 
 ion-item {
@@ -8,16 +6,17 @@ ion-item {
     --color: #000;
 }
 
-ion-toolbar {
-    --background: #ddddddce;
-    --color: #000;
-}
 
 ion-list {
     --background: #FFFFFF;
-}
-
-ion-card {
-    --background: #FFFFFF;
-    --color: #000;
 } */
+
+/* ion-card {
+    
+} */
+
+/* padding to make calendar buttons fit */
+ion-button {
+    --padding-end: 7px;
+    --padding-start: 7px;    
+}
