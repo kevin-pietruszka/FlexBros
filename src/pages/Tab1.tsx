@@ -3,7 +3,6 @@ import ExploreContainer from '../components/ExploreContainer';
 import { Routine, Workout, Exercise } from "../routine"
 import { getsUsersRoutines, readRoutine } from "../db"
 import React, { useState, useEffect } from 'react';
-import './Tab1.css';
 
 const uid = "KznJACOrQoOeBo4SrZywbPc6KE72"
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -113,7 +112,7 @@ const Tab1: React.FC = () => {
             <IonCardTitle class="ion-text-center">{months[date.getMonth()]}</IonCardTitle>
             <IonButton>Next</IonButton>
           </IonRow>
-          <IonGrid class="ion-text-center">
+          <IonGrid>
             <IonRow>
               <IonCol>Sun</IonCol>
               <IonCol>Mon</IonCol>

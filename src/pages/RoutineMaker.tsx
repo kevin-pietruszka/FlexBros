@@ -1,6 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
-import './RoutineMaker.css';
 
 const RoutineMaker: React.FC = () => {
 
