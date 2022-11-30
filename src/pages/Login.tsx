@@ -1,6 +1,5 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import { useState } from 'react';
-import './Login.css';
 
 /* Firebase imports */
 import { initializeApp } from "firebase/app";
@@ -59,8 +58,10 @@ const Login: React.FC = () => {
           <IonItem>
             <IonInput type="password" placeholder="Password" onIonInput={(e:any) => setPassword(e.target.value)}></IonInput>
           </IonItem>
-          <IonButton onClick={() => login()}>Login</IonButton> 
-          <IonButton routerLink='/CreateAccount'>Create Account</IonButton>
+          <IonItem>
+            <IonButton onClick={() => login()} routerLink='/Tab1'>Login</IonButton> 
+            <IonButton routerLink='/CreateAccount'>Create Account</IonButton>
+          </IonItem>
         </IonList>
       </IonContent>
     </IonPage>
