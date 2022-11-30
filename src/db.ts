@@ -147,9 +147,14 @@ export async function uploadRoutine(routine: Routine) {
 
         for (const exercise of workout.exercises) {
 
+            let baseline = [];
+            for (const set of exercise.baseline) {
+                baseline.push( {"reps": set.reps, "weight": set.weight} )
+            }
+
             const exerciseDocument = {
                 exercise_name: exercise.exerciseName,
-                baseline: exercise.baseline,
+                baseline: baseline,
                 history: exercise.history,
                 user_id: exercise.userID,
                 workout_ref: workoutID
