@@ -1,4 +1,4 @@
-import { Exercise, HistoryItem, Routine, Set, Workout } from "./routine";
+import { Exercise, Routine, Set, Workout } from "./routine";
 import {getFirestore, collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { app } from "./firebase";
 
@@ -6,7 +6,7 @@ import { app } from "./firebase";
 const db = getFirestore(app);
 
 /**
- * Functionto return list of Routine names associated with an Uset
+ * Function to return list of Routine names associated with an Uset
  * @param userID string of user id in firebase
  * @returns String array of routine names
  */
@@ -22,6 +22,45 @@ export async function getsUsersRoutines(userID: string) {
     });
 
     return routines;
+}
+
+/**
+ * Function to return a list of Exercise objects needed 
+ * for displaying the statistics of the data
+ * @param userID string of userid in firebase
+ * @returns String of array of exercise names
+ */
+export async function getUserExercises(userID: string) {
+    const exerciseRef = collection(db, "exercises");
+
+    const exerciseQuery = query(exerciseRef, where("user_id", "==", userID));
+
+    const exercises: string[] = [];
+
+    const exerciseSnap = await getDocs(exerciseQuery);
+    exerciseSnap.forEach( (doc) => {
+        exercises.push(doc.data().exercise_name);
+    });
+
+    return exercises;
+}
+
+/**
+ * Function to get the history of an exercise
+ * @param userId string of userid in firebase
+ * @param exerciseName string of exercisename in firebase
+ */
+export async function getExerciseHistory(userID: string, exerciseName: string) {
+
+    const exerciseRef = collection(db, "exercises");
+    const exerciseQuery = query(exerciseRef, where("user_id", "==", userID), where("routine_name", "==", exerciseName));
+
+    const exerciseSnap = await getDocs(exerciseQuery);
+    let hist = null;
+    exerciseSnap.forEach( (doc) => {
+        hist = doc.data().history;
+    });
+    return hist;
 }
 
 /**
@@ -61,23 +100,12 @@ export async function readRoutine(routineName: string, userID: string) {
         const exerciseSnap = await getDocs(exerciseQuery);
 
         for (const exerciseDocument of exerciseSnap.docs) {
-            let history: HistoryItem[] = []
+            
             const excerise = exerciseDocument.data();
 
-            for (const hist of excerise.history) {
-
-                let sets: Set[] = [];
-
-                for (const set of hist.sets) {
-                    sets.push(new Set(set.reps, set.weight));
-                }
-
-                history.push(new HistoryItem(hist.start, hist.end, sets));
-
-            }
-
-            exercises.push(new Exercise(excerise.exercise_name, excerise.user_id, history));
+            exercises.push(new Exercise(excerise.exercise_name, excerise.user_id, excerise.baseline, excerise.history));
         }
+
         const workout = workoutDocument.data();
         workouts.push(new Workout(workout.workout_name, workout.user_id, workout.days, exercises));
     }
@@ -86,43 +114,13 @@ export async function readRoutine(routineName: string, userID: string) {
 
 }
 
-
-/**
- * Helper to generate history map
- * @param exercise Exercise with history object
- * @returns map of history data
- */
-function generateHistory(exercise: Exercise) {
-
-    let historyArray: any[] = [];
-
-    for (const history of exercise.history) {
-        let tmp = [];
-
-        for (const set of history.sets) {
-            tmp.push({
-                reps: set.reps,
-                weight: set.weight
-            });
-        }
-
-        historyArray.push({
-            start: history.startDate,
-            end: history.endDate,
-            sets: tmp
-        });
-    }
-
-    return historyArray
-}
-
 /**
  * Function to create a routine in a database with the associated workouts and exercises
  * 
  * @param routine_object Object that contains information for making a routine in the database
  * @returns ID of generated document
  */
-export async function createRoutine(routine: Routine) {
+export async function uploadRoutine(routine: Routine) {
 
     const exerciseCollection = collection(db, "exercises");
     const workoutCollection = collection(db, "workouts");
@@ -149,12 +147,16 @@ export async function createRoutine(routine: Routine) {
 
         for (const exercise of workout.exercises) {
 
-            const historyMap = generateHistory(exercise);
+            let baseline = [];
+            for (const set of exercise.baseline) {
+                baseline.push( {"reps": set.reps, "weight": set.weight} )
+            }
 
             const exerciseDocument = {
                 exercise_name: exercise.exerciseName,
-                history: historyMap,
-                user_id: routine.userID,
+                baseline: baseline,
+                history: exercise.history,
+                user_id: exercise.userID,
                 workout_ref: workoutID
             }
 
