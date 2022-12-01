@@ -23,8 +23,8 @@ ion-button {
 
 #add_route_button {
     /* width:100px; */
-    position: relative;
-    margin-left: 33%;
+    /* position: relative; */
+    margin-left: 35%;
 }
 
 #prev_button {
@@ -36,13 +36,13 @@ ion-button {
 }
 
 #month_title {
-    margin-top: 5px;    
+    margin-top: 15px;    
 }
 
 #login_button {
-    margin-left: 20%;
+    margin-left: 0px;
 }
 
 #create_account_button {
-    margin-right: 20%;
+    margin-right: 60%;
 }
