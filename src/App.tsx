@@ -38,6 +38,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import EditWorkout from './pages/EditWorkout';
 
 setupIonicReact();
 
@@ -66,6 +67,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/RoutineMaker">
             <RoutineMaker />
+          </Route>
+          <Route exact path="/EditWorkout">
+            <EditWorkout />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
