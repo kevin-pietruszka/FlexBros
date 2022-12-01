@@ -14,7 +14,8 @@ import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Tab1 from './pages/Tab1';
 import Routines from './pages/Routines';
-import Tab3 from './pages/Tab3';
+import RoutineMaker from './pages/RoutineMaker';
+import ExercisesStats from './pages/ExercisesStats';
 import progress_icon from './icons/bar-chart-outline.svg';
 import routine_icon from './icons/barbell-outline.svg';
 import calendar_icon from './icons/calendar-outline.svg';
@@ -58,10 +59,13 @@ const App: React.FC = () => (
             <Routines />
           </Route>
           <Route path="/tab3">
-            <Tab3 />
+            <ExercisesStats />
           </Route>
           <Route exact path="/">
             <Redirect to="/login" />
+          </Route>
+          <Route exact path="/RoutineMaker">
+            <RoutineMaker />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">

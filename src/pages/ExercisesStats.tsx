@@ -2,7 +2,6 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem,
 import { useEffect, useState } from 'react';
 import { getUserExercises } from '../db';
 import { auth } from '../firebase';
-import './ExerciseStats.css';
 
 
 const ExerciseStats: React.FC = () => {
