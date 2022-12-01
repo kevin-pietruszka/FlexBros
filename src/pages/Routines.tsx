@@ -26,13 +26,13 @@ const Routines: React.FC = () => {
               <IonTitle>Routine list</IonTitle>
             </IonItem>
             <IonItem>
-              <IonTitle>Some routine</IonTitle>
+              <IonContent>Some routine</IonContent>
               <IonButton id="activate_button">Activate</IonButton>
             </IonItem>
           </IonList>
         </IonCard>
         <IonList>
-            <IonButton id="add_route_button" routerLink="\RoutineMaker">Add a routine</IonButton>
+            <IonButton id="add_route_button" routerLink="/RoutineMaker">Add a routine</IonButton>
         </IonList>
       </IonContent>
     </IonPage>
