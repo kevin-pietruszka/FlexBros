@@ -1,6 +1,4 @@
 /* ion-content {
-    --background: #FFFFFF;
-    --color: #000;
 }
 
 ion-item {
@@ -8,16 +6,43 @@ ion-item {
     --color: #000;
 }
 
-ion-toolbar {
-    --background: #ddddddce;
-    --color: #000;
-}
 
 ion-list {
     --background: #FFFFFF;
+} */
+
+/* ion-card {
+    
+} */
+
+/* padding to make calendar buttons fit */
+ion-button {
+    --padding-end: 7px;
+    --padding-start: 7px;    
 }
 
-ion-card {
-    --background: #FFFFFF;
-    --color: #000;
-} */
+#add_route_button {
+    /* width:100px; */
+    /* position: relative; */
+    margin-left: 35%;
+}
+
+#prev_button {
+    margin-right: 15%;
+}
+
+#next_button {
+    margin-left: 15%;
+}
+
+#month_title {
+    margin-top: 15px;    
+}
+
+#login_button {
+    margin-left: 0px;
+}
+
+#create_account_button {
+    margin-right: 60%;
+}

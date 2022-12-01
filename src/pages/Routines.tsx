@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton, IonCard, IonItem } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 
 const Routines: React.FC = () => {
@@ -11,7 +11,7 @@ const Routines: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Routines</IonTitle>
+          <IonTitle class="ion-text-center">Routines</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -20,8 +20,19 @@ const Routines: React.FC = () => {
             <IonTitle size="large">Routines</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonCard>
+          <IonList>
+            <IonItem>
+              <IonTitle>Routine list</IonTitle>
+            </IonItem>
+            <IonItem>
+              <IonTitle>Some routine</IonTitle>
+              <IonButton id="activate_button">Activate</IonButton>
+            </IonItem>
+          </IonList>
+        </IonCard>
         <IonList>
-            <IonButton routerLink="\RoutineMaker">Maker</IonButton>
+            <IonButton id="add_route_button" routerLink="\RoutineMaker">Add a routine</IonButton>
         </IonList>
       </IonContent>
     </IonPage>

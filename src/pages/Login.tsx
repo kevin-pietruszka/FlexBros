@@ -1,5 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import { useState } from 'react';
+import './Global.css'
 
 /* Firebase imports */
 import { initializeApp } from "firebase/app";
@@ -42,7 +43,7 @@ const Login: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Login</IonTitle>
+          <IonTitle class="ion-text-center">Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -59,8 +60,8 @@ const Login: React.FC = () => {
             <IonInput type="password" placeholder="Password" onIonInput={(e:any) => setPassword(e.target.value)}></IonInput>
           </IonItem>
           <IonItem>
-            <IonButton onClick={() => login()} routerLink='/Tab1'>Login</IonButton> 
-            <IonButton routerLink='/CreateAccount'>Create Account</IonButton>
+            <IonButton id="login_button" onClick={() => login()} routerLink='/Tab1'>Login</IonButton> 
+            <IonButton id="create_account_button" routerLink='/CreateAccount'>Create Account</IonButton>
           </IonItem>
         </IonList>
       </IonContent>
