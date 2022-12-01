@@ -20,3 +20,17 @@ ion-button {
     --padding-end: 7px;
     --padding-start: 7px;    
 }
+
+#add_route_button {
+    /* width:100px; */
+    position: relative;
+    margin-left: 33%;
+}
+
+#prev_button {
+    margin-right: 15%;
+}
+
+#next_button {
+    margin-left: 15%;
+}
