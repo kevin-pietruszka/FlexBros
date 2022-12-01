@@ -16,6 +16,9 @@ import CreateAccount from './pages/CreateAccount';
 import Tab1 from './pages/Tab1';
 import Routines from './pages/Routines';
 import Tab3 from './pages/Tab3';
+import progress_icon from './icons/bar-chart-outline.svg';
+import routine_icon from './icons/barbell-outline.svg';
+import calendar_icon from './icons/calendar-outline.svg';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -64,15 +67,15 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
+            <IonIcon src={calendar_icon}>calendar</IonIcon>
             <IonLabel>Workouts</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
+            <IonIcon src={routine_icon}>routines</IonIcon>
             <IonLabel>Routines</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
+            <IonIcon src={progress_icon}>progress</IonIcon>
             <IonLabel>Progress</IonLabel>
           </IonTabButton>
         </IonTabBar>
