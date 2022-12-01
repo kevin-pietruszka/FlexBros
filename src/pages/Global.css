@@ -34,3 +34,7 @@ ion-button {
 #next_button {
     margin-left: 15%;
 }
+
+#month_title {
+    margin-top: 5px;    
+}
