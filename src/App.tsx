@@ -10,12 +10,18 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+
+// page imports for routing
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Tab1 from './pages/Tab1';
 import Routines from './pages/Routines';
 import RoutineMaker from './pages/RoutineMaker';
 import ExercisesStats from './pages/ExercisesStats';
+import EditWorkout from './pages/EditWorkout';
+import CreateWorkout from './pages/CreateWorkout';
+
+// icon imports for toolbar
 import progress_icon from './icons/bar-chart-outline.svg';
 import routine_icon from './icons/barbell-outline.svg';
 import calendar_icon from './icons/calendar-outline.svg';
@@ -66,6 +72,12 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/RoutineMaker">
             <RoutineMaker />
+          </Route>
+          <Route exact path="/EditWorkout">
+            <EditWorkout />
+          </Route>
+          <Route exact path ="/CreateWorkout">
+            <CreateWorkout />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
