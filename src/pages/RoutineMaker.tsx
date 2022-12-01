@@ -11,7 +11,7 @@ const RoutineMaker: React.FC = () => {
   
   const finishRoutine = async () => {
     // on finish save routine and post to database
-  }
+  };
 
   return (
     <IonPage>
@@ -39,7 +39,7 @@ const RoutineMaker: React.FC = () => {
               <IonButton id="remove_button">Remove</IonButton>
             </IonItem>
           </IonList>
-          <IonButton routerLink="/Edit">Edit</IonButton>
+          <IonButton routerLink="/EditWorkout">Edit</IonButton>
           <IonButton onClick = {() => finishRoutine} routerLink="/Routines">Finish</IonButton>
         </IonCard>
       </IonContent>
