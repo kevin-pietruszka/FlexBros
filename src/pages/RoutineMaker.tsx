@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton, IonCard, IonInput, IonItem } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 
 const RoutineMaker: React.FC = () => {
@@ -26,10 +26,22 @@ const RoutineMaker: React.FC = () => {
             <IonTitle size="large">Routine Maker</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonList>
-            <IonButton routerLink="\Edit">Edit</IonButton>
-            <IonButton onClick = {() => finishRoutine} routerLink="\Routines">Finish</IonButton>
-        </IonList>
+        <IonCard>
+          <IonItem>
+            <IonInput placeholder='Name of routine'></IonInput>
+          </IonItem>
+          <IonList>
+            <IonItem>
+              <IonTitle>Workouts</IonTitle>
+            </IonItem>
+            <IonItem>
+              <IonContent>begin list of workouts</IonContent>
+              <IonButton id="remove_button">Remove</IonButton>
+            </IonItem>
+          </IonList>
+          <IonButton routerLink="/Edit">Edit</IonButton>
+          <IonButton onClick = {() => finishRoutine} routerLink="/Routines">Finish</IonButton>
+        </IonCard>
       </IonContent>
     </IonPage>
   );
