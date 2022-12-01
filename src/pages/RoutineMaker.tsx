@@ -17,7 +17,7 @@ const RoutineMaker: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle class="ion-text-center">Routine Maker</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

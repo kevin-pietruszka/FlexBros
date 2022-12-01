@@ -44,7 +44,7 @@ const CreateAccount: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Create Account</IonTitle>
+          <IonTitle class="ion-text-center">Create Account</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

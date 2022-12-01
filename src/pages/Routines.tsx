@@ -11,7 +11,7 @@ const Routines: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Routines</IonTitle>
+          <IonTitle class="ion-text-center">Routines</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

@@ -100,7 +100,7 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Calendar</IonTitle>
+          <IonTitle class="ion-text-center">Calendar</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
