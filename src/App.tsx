@@ -10,7 +10,6 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Tab1 from './pages/Tab1';
