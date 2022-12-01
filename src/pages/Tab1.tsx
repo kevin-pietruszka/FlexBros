@@ -110,7 +110,7 @@ const Tab1: React.FC = () => {
         <IonCard>
           <IonRow class="ion-justify-content-center">
             <IonButton id="prev_button">Prev</IonButton>
-            <IonCardTitle class="ion-text-center">{months[date.getMonth()]}</IonCardTitle>
+            <IonCardTitle id="month_title" class="ion-text-center">{months[date.getMonth()]}</IonCardTitle>
             <IonButton id="next_button">Next</IonButton>
           </IonRow>
           <IonGrid>
