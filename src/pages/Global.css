@@ -38,3 +38,11 @@ ion-button {
 #month_title {
     margin-top: 5px;    
 }
+
+#login_button {
+    margin-left: 20%;
+}
+
+#create_account_button {
+    margin-right: 20%;
+}
