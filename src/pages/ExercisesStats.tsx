@@ -19,7 +19,7 @@ const ExerciseStats: React.FC = () => {
             </IonTitle>
         </IonHeader>
         <IonContent>
-            Fuck me in the ass
+            Kevin is gay?
         </IonContent>
     </IonPage>
     );
