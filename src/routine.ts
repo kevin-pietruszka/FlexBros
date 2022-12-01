@@ -2,11 +2,13 @@ export class Routine {
 
     routineName:string;
     userID:string;
+    startDate: string;
     workouts:Workout[];
 
-    constructor (name:string, userID:string, workouts: Workout[]) {
+    constructor (name:string, userID:string, date:string, workouts: Workout[]) {
         this.routineName = name;
         this.userID = userID;
+        this.startDate = date;
         this.workouts = workouts;
     }
 }
@@ -74,4 +76,4 @@ const w1 = new Workout("Push", userID, ['MON', 'THU'], e);
 const w2 = new Workout("Pull", userID, ['TUE', 'FRI'], p);
 
 const w = [w1, w2];
-export const example = new Routine("Gerneric Routine", userID, w);
+export const example = new Routine("Gerneric Routine", userID, "11/01/2022", w);

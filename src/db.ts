@@ -1,5 +1,5 @@
 import { Exercise, Routine, Set, Workout } from "./routine";
-import {getFirestore, collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import {getFirestore, collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc } from "firebase/firestore";
 import { app } from "./firebase";
 
 
@@ -53,14 +53,49 @@ export async function getUserExercises(userID: string) {
 export async function getExerciseHistory(userID: string, exerciseName: string) {
 
     const exerciseRef = collection(db, "exercises");
-    const exerciseQuery = query(exerciseRef, where("user_id", "==", userID), where("routine_name", "==", exerciseName));
+    const exerciseQuery = query(exerciseRef, where("user_id", "==", userID), where("exercise_name", "==", exerciseName));
 
     const exerciseSnap = await getDocs(exerciseQuery);
-    let hist = null;
-    exerciseSnap.forEach( (doc) => {
-        hist = doc.data().history;
+    const exercise = exerciseSnap.docs[0].data();
+
+    let location = `workouts/${exercise.workout_ref}`
+    const workout = await getDoc(doc(db, location));
+
+    if (!workout.exists()) {
+        return;
+    }
+    location = `routines/${workout.data().routine_ref}`;
+    const rountine = await getDoc(doc(db, location));
+    if (!rountine.exists()) {
+        return;
+    }
+
+    return {
+        'exercise': new Exercise(exercise.exercise_name, exercise.user_id, exercise.baseline, exercise.history),
+        'start': rountine.data().start_date,
+        'days': workout.data().days
+    };
+}
+
+/**
+ * Updates history in an exercise document
+ * @param uid user id
+ * @param ename exercise name
+ * @param newHistoryMap new history data
+ */
+export async function updateHistory(uid:string, ename: string, newHistoryMap: any) {
+    
+    const exerciseRef = collection(db, "exercises");
+    const exerciseQuery = query(exerciseRef, where("user_id", "==", uid), where("exercise_name", "==", ename));
+
+    const exerciseSnap = await getDocs(exerciseQuery);
+    const exercise = exerciseSnap.docs[0].id;
+    
+    console.log(exercise);
+    
+    updateDoc(doc(db, 'exercises', exercise), {
+        'history': newHistoryMap
     });
-    return hist;
 }
 
 /**
@@ -110,7 +145,7 @@ export async function readRoutine(routineName: string, userID: string) {
         workouts.push(new Workout(workout.workout_name, workout.user_id, workout.days, exercises));
     }
     
-    return new Routine(routine.routine_name, routine.user_id, workouts);
+    return new Routine(routine.routine_name, routine.user_id, routine.start_date, workouts);
 
 }
 
@@ -118,9 +153,14 @@ export async function readRoutine(routineName: string, userID: string) {
  * Function to create a routine in a database with the associated workouts and exercises
  * 
  * @param routine_object Object that contains information for making a routine in the database
- * @returns ID of generated document
+ * @returns ID of generated document or null if the routine already exists
  */
 export async function uploadRoutine(routine: Routine) {
+
+    let x = await getsUsersRoutines(routine.userID);
+    if (routine.routineName in x) {
+        return null;
+    }
 
     const exerciseCollection = collection(db, "exercises");
     const workoutCollection = collection(db, "workouts");
@@ -128,6 +168,7 @@ export async function uploadRoutine(routine: Routine) {
 
     const routineDocument = {
         routine_name: routine.routineName,
+        start_date: routine.startDate,
         user_id: routine.userID
     }
     let routineDoc = await addDoc(routineCollection, routineDocument);
@@ -161,7 +202,7 @@ export async function uploadRoutine(routine: Routine) {
             }
 
             let exerciseDoc = await addDoc(exerciseCollection, exerciseDocument);
-            console.log(exerciseDoc.id);
+            
         }
     }
 
