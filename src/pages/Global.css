@@ -11,15 +11,19 @@ ion-button {
 }
 
 #prev_button {
-    margin-right: 15%;
+    margin-right: 50px;
 }
 
 #next_button {
-    margin-left: 15%;
+    margin-left: 50px;
 }
 
 #month_title {
-    margin-top: 15px;    
+    margin-top: 5px;    
+}
+
+#year_title {
+    margin-left: 15px;
 }
 
 #login_button {
@@ -32,4 +36,8 @@ ion-button {
 
 #select_text_color {
     --placeholder-color: black;
+}
+
+#day_button {
+    width: 30px;
 }
