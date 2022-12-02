@@ -1,9 +1,27 @@
 import { Exercise, Routine, Workout } from "./routine";
-import {getFirestore, collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc } from "firebase/firestore";
+import {getFirestore, collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc, setDoc } from "firebase/firestore";
 import { app } from "./firebase";
 
 
 const db = getFirestore(app);
+
+export async function initNewUser(userID:string) {
+    const newDoc = doc(db, 'paid', userID);
+
+    await setDoc(newDoc, {paid: false});
+
+    return 1;
+
+}
+
+export async function checkPaidUser(userID: string) {
+    const userDoc = doc(db, 'paid', userID);
+
+    let tmp: any = await getDoc(userDoc);
+
+    return tmp.havePaid ? true : false;
+}
+
 
 /**
  * Function to return list of Routine names associated with an Uset
