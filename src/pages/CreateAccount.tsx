@@ -4,6 +4,7 @@ import { useState } from 'react';
 /* Firebase imports */
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initNewUser } from '../db';
 
 const CreateAccount: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -29,13 +30,10 @@ const CreateAccount: React.FC = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          // ...
+          initNewUser(user.uid);
         })
         .catch((error) => {
           console.log(error)
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
         })
     }
   };
