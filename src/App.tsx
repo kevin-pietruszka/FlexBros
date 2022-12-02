@@ -20,6 +20,8 @@ import RoutineMaker from './pages/RoutineMaker';
 import ExercisesStats from './pages/ExercisesStats';
 import EditWorkout from './pages/EditWorkout';
 import CreateWorkout from './pages/CreateWorkout';
+import CalendarDay from './pages/CalendarDay';
+import EditExercise from './pages/EditExercise';
 
 // icon imports for toolbar
 import progress_icon from './icons/bar-chart-outline.svg';
@@ -78,6 +80,12 @@ const App: React.FC = () => (
           </Route>
           <Route exact path ="/CreateWorkout">
             <CreateWorkout />
+          </Route>
+          <Route exact path ="/CalendarDay">
+            <CalendarDay />
+          </Route>
+          <Route exact path ="/EditExercise">
+            <EditExercise />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
