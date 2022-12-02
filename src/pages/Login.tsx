@@ -1,12 +1,10 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonRouterLink } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton } from '@ionic/react';
 import { useState } from 'react';
 import './Global.css'
 
 /* Firebase imports */
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
-import { userInfo } from 'os';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");

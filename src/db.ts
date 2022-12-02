@@ -1,4 +1,4 @@
-import { Exercise, Routine, Set, Workout } from "./routine";
+import { Exercise, Routine, Workout } from "./routine";
 import {getFirestore, collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc } from "firebase/firestore";
 import { app } from "./firebase";
 
@@ -56,6 +56,9 @@ export async function getExerciseHistory(userID: string, exerciseName: string) {
     const exerciseQuery = query(exerciseRef, where("user_id", "==", userID), where("exercise_name", "==", exerciseName));
 
     const exerciseSnap = await getDocs(exerciseQuery);
+
+    if (exerciseSnap.docs[0] === undefined) return;
+
     const exercise = exerciseSnap.docs[0].data();
 
     let location = `workouts/${exercise.workout_ref}`
