@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonItem, IonSelect, IonSelectOption, IonCard } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonItem, IonSelect, IonSelectOption, IonCard, IonToolbar } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import ExerciseGraph from '../components/ExerciseGraph';
 import { getUserExercises, getExerciseHistory } from '../db';
@@ -109,12 +109,14 @@ const ExerciseStats: React.FC = () => {
     
         <IonPage>
             <IonHeader>
-                <IonTitle>
-                    Exercise Stat Viewer
-                </IonTitle>
+                <IonToolbar>
+                    <IonTitle class="ion-text-center" size="large">
+                        Exercise Stat Viewer
+                    </IonTitle>
+                </IonToolbar>
                 
             </IonHeader>
-            <IonContent>
+            <IonContent id="exercise_graph">
 
                 {
                     loadedHistory ? <ExerciseGraph chartData={historyData}> </ExerciseGraph> : <IonCard> </IonCard>
