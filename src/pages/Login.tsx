@@ -5,24 +5,12 @@ import './Global.css'
 /* Firebase imports */
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase';
 import { userInfo } from 'os';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCCoXcYl2kHu4Vso_PMhVXhMdLaj7C2whY",
-    authDomain: "flexbros-e3945.firebaseapp.com",
-    projectId: "flexbros-e3945",
-    storageBucket: "flexbros-e3945.appspot.com",
-    messagingSenderId: "662856376755",
-    appId: "1:662856376755:web:8c5f664896d935730f2bc6",
-    measurementId: "G-RY4NMVS1EC"
-  }
-
-  const app = initializeApp(firebaseConfig)
-  const auth = getAuth(app)
 
   const login  = async () => {
     signInWithEmailAndPassword(auth, email, password)
