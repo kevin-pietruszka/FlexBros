@@ -1,24 +1,18 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonCardTitle, IonCard, IonRow, IonGrid, IonCol, IonIcon } from '@ionic/react';
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonCardTitle, IonCard, IonRow, IonGrid, IonCol } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { getsUsersRoutines, readRoutine } from '../db';
-import { Exercise, Routine, Workout } from '../routine';
-import { getLoadedRoutine } from './Tab1';
+import { Exercise, Workout } from '../routine';
+import { getChosenDate, getLoadedRoutine } from './Tab1';
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const daysOfWeeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
-const date = new Date()
-var day : number
+var date : Date
 
 const CalendarDay: React.FC = () => {
-  let history = useHistory()
 
-  day = useLocation().state as number
-  let dayOfWeek = daysOfWeeks[new Date(date.getFullYear(), date.getMonth(), day).getDay()]
-
+  date = getChosenDate()
+  let dayOfWeek = daysOfWeeks[date.getDay()]
   var routine = getLoadedRoutine()
-
+  
   var workout : Workout | undefined
   routine.workouts.forEach((workout_) => {
     workout_.days.forEach((day) => {
@@ -28,6 +22,7 @@ const CalendarDay: React.FC = () => {
     })
   })
 
+  let history = useHistory()
   function editExercise (exercise: Exercise | undefined) {
     history.push({
       pathname: '/EditExercise',
@@ -44,7 +39,7 @@ const CalendarDay: React.FC = () => {
       </IonHeader>
       {workout != undefined && <IonContent fullscreen>
         <IonCard>
-          <IonCardTitle class="ion-text-center">{months[date.getMonth()] + ' ' + day}</IonCardTitle>
+          <IonCardTitle class="ion-text-center">{months[date.getMonth()] + ' ' + date.getDate()}</IonCardTitle>
         </IonCard>
         <IonCard>
           <IonCardTitle class="ion-text-center">{workout.workoutName}</IonCardTitle>
@@ -79,5 +74,5 @@ const CalendarDay: React.FC = () => {
   );
 };
 
-export function getDay() { return day }
+export function getDate() { return date }
 export default CalendarDay;

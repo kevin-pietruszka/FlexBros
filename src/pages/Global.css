@@ -29,3 +29,7 @@ ion-button {
 #create_account_button {
     margin-right: 60%;
 }
+
+#select_text_color {
+    --placeholder-color: black;
+}
