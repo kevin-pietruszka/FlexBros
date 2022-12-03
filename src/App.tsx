@@ -29,6 +29,7 @@ import Settings from './pages/settings';
 import progress_icon from './icons/bar-chart-outline.svg';
 import routine_icon from './icons/barbell-outline.svg';
 import calendar_icon from './icons/calendar-outline.svg';
+import settings_icon from './icons/settings-outline.svg'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
