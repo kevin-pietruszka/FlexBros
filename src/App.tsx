@@ -22,6 +22,8 @@ import EditWorkout from './pages/EditWorkout';
 import CreateWorkout from './pages/CreateWorkout';
 import CalendarDay from './pages/CalendarDay';
 import EditExercise from './pages/EditExercise';
+import Settings from './pages/settings';
+
 
 // icon imports for toolbar
 import progress_icon from './icons/bar-chart-outline.svg';
@@ -70,6 +72,9 @@ const App: React.FC = () => (
           <Route path="/tab3">
             <ExercisesStats />
           </Route>
+          <Route path="/tab4">
+            <Settings />
+          </Route>
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
@@ -101,6 +106,10 @@ const App: React.FC = () => (
           <IonTabButton tab="tab3" href="/tab3">
             <IonIcon src={progress_icon}>progress</IonIcon>
             <IonLabel>Progress</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab4" href="/tab4">
+            <IonIcon src={progress_icon}>progress</IonIcon>
+            <IonLabel>Settings</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

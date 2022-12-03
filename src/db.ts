@@ -1,9 +1,45 @@
 import { Exercise, Routine, Workout } from "./routine";
-import {getFirestore, collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc } from "firebase/firestore";
+import {getFirestore, collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc, setDoc } from "firebase/firestore";
 import { app } from "./firebase";
 
 
 const db = getFirestore(app);
+
+/**
+ * Function to store if user is premium version in database
+ * @param userID string of new userID
+ * @returns 1 if successfull
+ */
+export async function initNewUser(userID:string) {
+    const newDoc = doc(db, 'paid', userID);
+
+    await setDoc(newDoc, {paid: false});
+
+    return 1;
+
+}
+
+/**
+ * Checks if user is a premium user
+ * @param userID String of user id
+ * @returns boolean of if premium user
+ */
+export async function checkPaidUser(userID: string) {
+    const userDoc = doc(db, 'paid', userID);
+
+    let tmp: any = await getDoc(userDoc);
+
+    return tmp.havePaid ? true : false;
+}
+
+export async function changeToPaidStatus(userID: string, status: boolean) {
+    const userDoc = doc(db, 'paid', userID);
+
+    await updateDoc(userDoc, {paid: status});
+
+    return 1;
+}
+
 
 /**
  * Function to return list of Routine names associated with an Uset
