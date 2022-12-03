@@ -60,6 +60,8 @@ const ChangeEmail: React.FC = () => {
             validateEmail(confirmEmail)
         ) {
             changeEmail();
+        } else {
+            alert('One of the emails are not valid');
         }
     };
 
