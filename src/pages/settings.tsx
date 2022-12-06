@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonList, IonPage, IonTitle } from "@ionic/react";
+import { IonContent, IonHeader, IonList, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { useEffect, useState } from "react";
 import ChangeEmail from "../components/ChangeEmail";
 import ChangePassword from "../components/ChangePassword";
@@ -24,7 +24,9 @@ const Settings: React.FC = () => {
     return (
         <IonPage>
             <IonHeader>
-                <IonTitle>Settings</IonTitle>
+                <IonToolbar>
+                    <IonTitle class="ion-text-center" size="large">Settings</IonTitle>
+                </IonToolbar>                
             </IonHeader>
 
             <IonContent>
