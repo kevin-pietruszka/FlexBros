@@ -29,7 +29,7 @@ export async function checkPaidUser(userID: string) {
 
     let tmp: any = await getDoc(userDoc);
 
-    return tmp.havePaid ? true : false;
+    return tmp.data()['paid'] ? true : false;
 }
 
 export async function changeToPaidStatus(userID: string, status: boolean) {
