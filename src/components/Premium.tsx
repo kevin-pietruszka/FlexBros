@@ -88,14 +88,14 @@ const Premium: React.FC = () => {
                     <IonItem>
                         <IonText>
                             {" "}
-                            Change to premium version: current status{" "}
-                            {premiumStatus ? "Premium" : "Scrub"}{" "}
+                            You are a {premiumStatus ? "Premium" : "Scrub"} member, change status?
+                            
                         </IonText>
 
                         {changingVersion ? (
-                            <IonButton disabled={true}> Switch</IonButton>
+                            <IonButton slot ='end' disabled={true}> Switch </IonButton>
                         ) : (
-                            <IonButton onClick={changePremium}>
+                            <IonButton slot='end' onClick={changePremium}>
                                 {" "}
                                 Switch{" "}
                             </IonButton>
