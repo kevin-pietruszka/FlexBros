@@ -148,12 +148,12 @@ const Tab1: React.FC = () => {
           <IonRow>
             <IonCol></IonCol>
             <IonCol></IonCol>
-            <IonCol><IonButton color='blue' onClick={() => {setMonthOffset(monthOffset-1)}}>Prev</IonButton></IonCol>
+            <IonCol><IonButton id="prev_button"  color='blue' onClick={() => {setMonthOffset(monthOffset-1)}}>Prev</IonButton></IonCol>
             <IonCol>
               <IonRow><IonCardTitle id="month_title">{months[monthYear.getMonth()]}</IonCardTitle></IonRow>
               <IonRow><IonCardTitle id="year_title">{monthYear.getFullYear()}</IonCardTitle></IonRow>
             </IonCol>
-            <IonCol><IonButton color='blue' onClick={() => {setMonthOffset(monthOffset+1)}}>Next</IonButton></IonCol>
+            <IonCol><IonButton id="next_button" color='blue' onClick={() => {setMonthOffset(monthOffset+1)}}>Next</IonButton></IonCol>
             <IonCol></IonCol>
             <IonCol></IonCol>
           </IonRow>
@@ -167,58 +167,58 @@ const Tab1: React.FC = () => {
               <IonCol>Sat</IonCol>
             </IonRow>
             <IonRow>
-              <IonCol><IonButton onClick={() => ChooseDay(month[0][0])} size='small' color={colorMap.get(month[0][1])} disabled={(month[0][2] === 'true')}>{month[0][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[1][0])} size='small' color={colorMap.get(month[1][1])} disabled={(month[1][2] === 'true')}>{month[1][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[2][0])} size='small' color={colorMap.get(month[2][1])} disabled={(month[2][2] === 'true')}>{month[2][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[3][0])} size='small' color={colorMap.get(month[3][1])} disabled={(month[3][2] === 'true')}>{month[3][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[4][0])} size='small' color={colorMap.get(month[4][1])} disabled={(month[4][2] === 'true')}>{month[4][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[5][0])} size='small' color={colorMap.get(month[5][1])} disabled={(month[5][2] === 'true')}>{month[5][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[6][0])} size='small' color={colorMap.get(month[6][1])} disabled={(month[6][2] === 'true')}>{month[6][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[0][0])} size='small' color={colorMap.get(month[0][1])} disabled={(month[0][2] === 'true')}>{month[0][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[1][0])} size='small' color={colorMap.get(month[1][1])} disabled={(month[1][2] === 'true')}>{month[1][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[2][0])} size='small' color={colorMap.get(month[2][1])} disabled={(month[2][2] === 'true')}>{month[2][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[3][0])} size='small' color={colorMap.get(month[3][1])} disabled={(month[3][2] === 'true')}>{month[3][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[4][0])} size='small' color={colorMap.get(month[4][1])} disabled={(month[4][2] === 'true')}>{month[4][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[5][0])} size='small' color={colorMap.get(month[5][1])} disabled={(month[5][2] === 'true')}>{month[5][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[6][0])} size='small' color={colorMap.get(month[6][1])} disabled={(month[6][2] === 'true')}>{month[6][0]}</IonButton></IonCol>
             </IonRow>
             <IonRow>
-              <IonCol><IonButton onClick={() => ChooseDay(month[7][0])} size='small' color={colorMap.get(month[7][1])} disabled={(month[7][2] === 'true')}>{month[7][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[8][0])} size='small' color={colorMap.get(month[8][1])} disabled={(month[8][2] === 'true')}>{month[8][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[9][0])} size='small' color={colorMap.get(month[9][1])} disabled={(month[9][2] === 'true')}>{month[9][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[10][0])} size='small' color={colorMap.get(month[10][1])} disabled={(month[10][2] === 'true')}>{month[10][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[11][0])} size='small' color={colorMap.get(month[11][1])} disabled={(month[11][2] === 'true')}>{month[11][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[12][0])} size='small' color={colorMap.get(month[12][1])} disabled={(month[12][2] === 'true')}>{month[12][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[13][0])} size='small' color={colorMap.get(month[13][1])} disabled={(month[13][2] === 'true')}>{month[13][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[7][0])} size='small' color={colorMap.get(month[7][1])} disabled={(month[7][2] === 'true')}>{month[7][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[8][0])} size='small' color={colorMap.get(month[8][1])} disabled={(month[8][2] === 'true')}>{month[8][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[9][0])} size='small' color={colorMap.get(month[9][1])} disabled={(month[9][2] === 'true')}>{month[9][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[10][0])} size='small' color={colorMap.get(month[10][1])} disabled={(month[10][2] === 'true')}>{month[10][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[11][0])} size='small' color={colorMap.get(month[11][1])} disabled={(month[11][2] === 'true')}>{month[11][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[12][0])} size='small' color={colorMap.get(month[12][1])} disabled={(month[12][2] === 'true')}>{month[12][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[13][0])} size='small' color={colorMap.get(month[13][1])} disabled={(month[13][2] === 'true')}>{month[13][0]}</IonButton></IonCol>
             </IonRow>
             <IonRow>
-              <IonCol><IonButton onClick={() => ChooseDay(month[14][0])} size='small' color={colorMap.get(month[14][1])} disabled={(month[14][2] === 'true')}>{month[14][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[15][0])} size='small' color={colorMap.get(month[15][1])} disabled={(month[15][2] === 'true')}>{month[15][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[16][0])} size='small' color={colorMap.get(month[16][1])} disabled={(month[16][2] === 'true')}>{month[16][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[17][0])} size='small' color={colorMap.get(month[17][1])} disabled={(month[17][2] === 'true')}>{month[17][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[18][0])} size='small' color={colorMap.get(month[18][1])} disabled={(month[18][2] === 'true')}>{month[18][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[19][0])} size='small' color={colorMap.get(month[19][1])} disabled={(month[19][2] === 'true')}>{month[19][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[20][0])} size='small' color={colorMap.get(month[20][1])} disabled={(month[20][2] === 'true')}>{month[20][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[14][0])} size='small' color={colorMap.get(month[14][1])} disabled={(month[14][2] === 'true')}>{month[14][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[15][0])} size='small' color={colorMap.get(month[15][1])} disabled={(month[15][2] === 'true')}>{month[15][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[16][0])} size='small' color={colorMap.get(month[16][1])} disabled={(month[16][2] === 'true')}>{month[16][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[17][0])} size='small' color={colorMap.get(month[17][1])} disabled={(month[17][2] === 'true')}>{month[17][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[18][0])} size='small' color={colorMap.get(month[18][1])} disabled={(month[18][2] === 'true')}>{month[18][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[19][0])} size='small' color={colorMap.get(month[19][1])} disabled={(month[19][2] === 'true')}>{month[19][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[20][0])} size='small' color={colorMap.get(month[20][1])} disabled={(month[20][2] === 'true')}>{month[20][0]}</IonButton></IonCol>
             </IonRow>
             <IonRow>
-              <IonCol><IonButton onClick={() => ChooseDay(month[21][0])} size='small' color={colorMap.get(month[21][1])} disabled={(month[21][2] === 'true')}>{month[21][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[22][0])} size='small' color={colorMap.get(month[22][1])} disabled={(month[22][2] === 'true')}>{month[22][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[23][0])} size='small' color={colorMap.get(month[23][1])} disabled={(month[23][2] === 'true')}>{month[23][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[24][0])} size='small' color={colorMap.get(month[24][1])} disabled={(month[24][2] === 'true')}>{month[24][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[25][0])} size='small' color={colorMap.get(month[25][1])} disabled={(month[25][2] === 'true')}>{month[25][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[26][0])} size='small' color={colorMap.get(month[26][1])} disabled={(month[26][2] === 'true')}>{month[26][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[27][0])} size='small' color={colorMap.get(month[27][1])} disabled={(month[27][2] === 'true')}>{month[27][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[21][0])} size='small' color={colorMap.get(month[21][1])} disabled={(month[21][2] === 'true')}>{month[21][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[22][0])} size='small' color={colorMap.get(month[22][1])} disabled={(month[22][2] === 'true')}>{month[22][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[23][0])} size='small' color={colorMap.get(month[23][1])} disabled={(month[23][2] === 'true')}>{month[23][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[24][0])} size='small' color={colorMap.get(month[24][1])} disabled={(month[24][2] === 'true')}>{month[24][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[25][0])} size='small' color={colorMap.get(month[25][1])} disabled={(month[25][2] === 'true')}>{month[25][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[26][0])} size='small' color={colorMap.get(month[26][1])} disabled={(month[26][2] === 'true')}>{month[26][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[27][0])} size='small' color={colorMap.get(month[27][1])} disabled={(month[27][2] === 'true')}>{month[27][0]}</IonButton></IonCol>
             </IonRow>
             <IonRow>
-              <IonCol><IonButton onClick={() => ChooseDay(month[28][0])} size='small' color={colorMap.get(month[28][1])} disabled={(month[28][2] === 'true')}>{month[28][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[29][0])} size='small' color={colorMap.get(month[29][1])} disabled={(month[29][2] === 'true')}>{month[29][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[30][0])} size='small' color={colorMap.get(month[30][1])} disabled={(month[30][2] === 'true')}>{month[30][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[31][0])} size='small' color={colorMap.get(month[31][1])} disabled={(month[31][2] === 'true')}>{month[31][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[32][0])} size='small' color={colorMap.get(month[32][1])} disabled={(month[32][2] === 'true')}>{month[32][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[33][0])} size='small' color={colorMap.get(month[33][1])} disabled={(month[33][2] === 'true')}>{month[33][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[34][0])} size='small' color={colorMap.get(month[34][1])} disabled={(month[34][2] === 'true')}>{month[34][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[28][0])} size='small' color={colorMap.get(month[28][1])} disabled={(month[28][2] === 'true')}>{month[28][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[29][0])} size='small' color={colorMap.get(month[29][1])} disabled={(month[29][2] === 'true')}>{month[29][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[30][0])} size='small' color={colorMap.get(month[30][1])} disabled={(month[30][2] === 'true')}>{month[30][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" id="day_button" onClick={() => ChooseDay(month[31][0])} size='small' color={colorMap.get(month[31][1])} disabled={(month[31][2] === 'true')}>{month[31][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[32][0])} size='small' color={colorMap.get(month[32][1])} disabled={(month[32][2] === 'true')}>{month[32][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[33][0])} size='small' color={colorMap.get(month[33][1])} disabled={(month[33][2] === 'true')}>{month[33][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[34][0])} size='small' color={colorMap.get(month[34][1])} disabled={(month[34][2] === 'true')}>{month[34][0]}</IonButton></IonCol>
             </IonRow>
             {month[35][1] != 'Other' && <IonRow>
-              <IonCol><IonButton onClick={() => ChooseDay(month[35][0])} size='small' color={colorMap.get(month[35][1])} disabled={(month[35][2] === 'true')}>{month[35][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[36][0])} size='small' color={colorMap.get(month[36][1])} disabled={(month[36][2] === 'true')}>{month[36][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[37][0])} size='small' color={colorMap.get(month[37][1])} disabled={(month[37][2] === 'true')}>{month[37][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[38][0])} size='small' color={colorMap.get(month[38][1])} disabled={(month[38][2] === 'true')}>{month[38][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[39][0])} size='small' color={colorMap.get(month[39][1])} disabled={(month[39][2] === 'true')}>{month[39][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[40][0])} size='small' color={colorMap.get(month[40][1])} disabled={(month[40][2] === 'true')}>{month[40][0]}</IonButton></IonCol>
-              <IonCol><IonButton onClick={() => ChooseDay(month[41][0])} size='small' color={colorMap.get(month[41][1])} disabled={(month[41][2] === 'true')}>{month[41][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[35][0])} size='small' color={colorMap.get(month[35][1])} disabled={(month[35][2] === 'true')}>{month[35][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[36][0])} size='small' color={colorMap.get(month[36][1])} disabled={(month[36][2] === 'true')}>{month[36][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[37][0])} size='small' color={colorMap.get(month[37][1])} disabled={(month[37][2] === 'true')}>{month[37][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[38][0])} size='small' color={colorMap.get(month[38][1])} disabled={(month[38][2] === 'true')}>{month[38][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[39][0])} size='small' color={colorMap.get(month[39][1])} disabled={(month[39][2] === 'true')}>{month[39][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[40][0])} size='small' color={colorMap.get(month[40][1])} disabled={(month[40][2] === 'true')}>{month[40][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[41][0])} size='small' color={colorMap.get(month[41][1])} disabled={(month[41][2] === 'true')}>{month[41][0]}</IonButton></IonCol>
             </IonRow>}
           </IonGrid>
         </IonCard>

@@ -14,16 +14,27 @@ ion-select {
     margin-left: 35%;
 }
 
+#day_button {
+    width: 30px;
+}
+
 #prev_button {
-    margin-right: 15%;
+    margin-right: 50px;
 }
 
 #next_button {
-    margin-left: 15%;
+    margin-left: 50px;
 }
 
 #month_title {
-    margin-top: 15px;    
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#year_title {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #login_button {
