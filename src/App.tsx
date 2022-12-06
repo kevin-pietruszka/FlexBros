@@ -14,7 +14,7 @@ import { IonReactRouter } from '@ionic/react-router';
 // page imports for routing
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
-import Tab1 from './pages/Tab1';
+import Tab1 from './pages/Calendar';
 import Routines from './pages/Routines';
 import RoutineMaker from './pages/RoutineMaker';
 import ExercisesStats from './pages/ExercisesStats';
