@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { updateHistory } from '../db';
 import { Exercise, Set } from '../routine';
-import { getDate } from './CalendarDay';
+import { getExercise } from './CalendarDay';
+import { getSelectedDate } from './Tab1';
 
 const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
 
@@ -11,14 +12,15 @@ const EditExercise: React.FC = () => {
 
   const [sets, setSets] = useState<Set[]>([]);  
 
-  let exercise = useLocation().state as Exercise
+  let state = useLocation().state
+  let exercise = getExercise()
   
   if (sets.length === 0 && exercise !== undefined) {
-    setSets(exercise.baseline)
-  }
-
-  function addSet () {
-    setSets(sets => [...sets, {'weight' : 0, 'reps' : 0}])
+    if (exercise.history[getDateString()] === undefined) {
+      setSets(exercise.baseline)
+    } else {
+      setSets(exercise.history[getDateString()])
+    }
   }
 
   function setReps (setNum : number, reps : string) {
@@ -33,27 +35,22 @@ const EditExercise: React.FC = () => {
     setSets(setsCopy)
   }
 
-  function Save() {
-    var date = getDate()
-    var dateStr : string
+  function getDateString() { 
+    var date = getSelectedDate()
 
     if (date.getDate() < 10) {
-      dateStr = date.getMonth() + '/0' + date.getDate() + '/' + date.getFullYear()
-    } else {
-      dateStr = date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear()
+      return date.getMonth() + '/0' + date.getDate() + '/' + date.getFullYear()
     }
-    
+
+    return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear()
+  }
+
+  function Save() {
     var exHistory = exercise.history
-    exHistory[dateStr] = sets
-    console.log(exHistory)
+    exHistory[getDateString()] = sets
+    
     updateHistory(uid, exercise.exerciseName, exHistory)
     setSets([])
-
-    let history = useHistory()
-    history.push({
-      pathname: '/CalendarDay',
-      state: getDate()
-    })
   }
 
   return (
@@ -75,7 +72,7 @@ const EditExercise: React.FC = () => {
               <IonCol>Weight</IonCol>
             </IonRow>
             {sets.length >= 1 && <IonRow>
-              <IonCol className='setFont'>Set 1</IonCol>
+              <IonCol>Set 1</IonCol>
               <IonCol>
                 <IonItem>
                     <IonInput onIonInput={(e: any) => setReps(0, e.target.value)} type='number' value={sets[0].reps}></IonInput>
@@ -88,7 +85,7 @@ const EditExercise: React.FC = () => {
               </IonCol>
             </IonRow>}
             {sets.length >= 2 && <IonRow>
-              <IonCol className='setFont'>Set 2</IonCol>
+              <IonCol>Set 2</IonCol>
               <IonCol>
                 <IonItem>
                     <IonInput onIonInput={(e: any) => setReps(1, e.target.value)} type='number' value={sets[1].reps}></IonInput>
@@ -101,7 +98,7 @@ const EditExercise: React.FC = () => {
               </IonCol>
             </IonRow>}
             {sets.length >= 3 && <IonRow>
-              <IonCol className='setFont'>Set 3</IonCol>
+              <IonCol>Set 3</IonCol>
               <IonCol>
                 <IonItem>
                     <IonInput onIonInput={(e: any) => setReps(2, e.target.value)} type='number' value={sets[2].reps}></IonInput>
@@ -114,7 +111,7 @@ const EditExercise: React.FC = () => {
               </IonCol>
             </IonRow>}
             {sets.length >= 4 && <IonRow>
-              <IonCol className='setFont'>Set 4</IonCol>
+              <IonCol>Set 4</IonCol>
               <IonCol>
                 <IonItem>
                     <IonInput onIonInput={(e: any) => setReps(3, e.target.value)} type='number' value={sets[3].reps}></IonInput>
@@ -127,7 +124,7 @@ const EditExercise: React.FC = () => {
               </IonCol>
             </IonRow>}
             {sets.length >= 5 && <IonRow>
-              <IonCol className='setFont'>Set 5</IonCol>
+              <IonCol>Set 5</IonCol>
               <IonCol>
                 <IonItem>
                     <IonInput onIonInput={(e: any) => setReps(4, e.target.value)} type='number' value={sets[4].reps}></IonInput>
@@ -140,7 +137,7 @@ const EditExercise: React.FC = () => {
               </IonCol>
             </IonRow>}
             {sets.length >= 6 && <IonRow>
-              <IonCol className='setFont'>Set 6</IonCol>
+              <IonCol>Set 6</IonCol>
               <IonCol>
                 <IonItem>
                     <IonInput onIonInput={(e: any) => setReps(5, e.target.value)} type='number' value={sets[5].reps}></IonInput>
@@ -152,11 +149,13 @@ const EditExercise: React.FC = () => {
                 </IonItem>
               </IonCol>
             </IonRow>}
-            <IonCol>
-                <IonButton onClick={() => setSets([])} routerLink='/CalendarDay'>Back</IonButton>
-                {sets.length < 6 && <IonButton onClick={() => addSet()}>Add Set</IonButton>}
-                <IonButton onClick={() => Save()} routerLink='/CalendarDay'>Save</IonButton>
-            </IonCol>
+            <IonRow>
+              <IonCol></IonCol>
+              <IonCol><IonButton color='blue' onClick={() => setSets([])} routerLink='/CalendarDay'>Back</IonButton></IonCol>
+              {sets.length < 6 && <IonCol><IonButton color='blue' onClick={() => setSets(sets => [...sets, {'weight' : 0, 'reps' : 0}])}>Add Set</IonButton></IonCol>}
+              <IonCol><IonButton color='blue' onClick={() => Save()} routerLink='/CalendarDay'>Save Exercise</IonButton></IonCol>
+              <IonCol></IonCol>
+            </IonRow>
           </IonGrid>
         </IonCard>
       </IonContent>
