@@ -206,7 +206,7 @@ const Tab1: React.FC = () => {
               <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[28][0])} size='small' color={colorMap.get(month[28][1])} disabled={(month[28][2] === 'true')}>{month[28][0]}</IonButton></IonCol>
               <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[29][0])} size='small' color={colorMap.get(month[29][1])} disabled={(month[29][2] === 'true')}>{month[29][0]}</IonButton></IonCol>
               <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[30][0])} size='small' color={colorMap.get(month[30][1])} disabled={(month[30][2] === 'true')}>{month[30][0]}</IonButton></IonCol>
-              <IonCol><IonButton id="day_button" id="day_button" onClick={() => ChooseDay(month[31][0])} size='small' color={colorMap.get(month[31][1])} disabled={(month[31][2] === 'true')}>{month[31][0]}</IonButton></IonCol>
+              <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[31][0])} size='small' color={colorMap.get(month[31][1])} disabled={(month[31][2] === 'true')}>{month[31][0]}</IonButton></IonCol>
               <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[32][0])} size='small' color={colorMap.get(month[32][1])} disabled={(month[32][2] === 'true')}>{month[32][0]}</IonButton></IonCol>
               <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[33][0])} size='small' color={colorMap.get(month[33][1])} disabled={(month[33][2] === 'true')}>{month[33][0]}</IonButton></IonCol>
               <IonCol><IonButton id="day_button" onClick={() => ChooseDay(month[34][0])} size='small' color={colorMap.get(month[34][1])} disabled={(month[34][2] === 'true')}>{month[34][0]}</IonButton></IonCol>
