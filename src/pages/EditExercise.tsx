@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { updateHistory } from '../db';
 import { Exercise, Set } from '../routine';
 import { getExercise } from './CalendarDay';
-import { getSelectedDate } from './Tab1';
+import { getSelectedDate } from './Calendar';
 
 const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
 
