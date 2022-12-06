@@ -1,6 +1,8 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonTitle,
+  IonFooter,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
@@ -111,9 +113,11 @@ const App: React.FC = () => (
             <IonIcon src={progress_icon}>progress</IonIcon>
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
-        </IonTabBar>
+        </IonTabBar> 
       </IonTabs>
     </IonReactRouter>
+    <IonFooter id="banner_ad" slot="bottom">
+    </IonFooter>
   </IonApp>
 );
 
