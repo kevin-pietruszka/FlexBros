@@ -119,7 +119,7 @@ const ExerciseStats: React.FC = () => {
             <IonContent id="exercise_graph">
 
                 {
-                    loadedHistory ? <ExerciseGraph chartData={historyData}> </ExerciseGraph> : <IonCard> </IonCard>
+                    loadedHistory ? <ExerciseGraph chartData={historyData} yaxis={selectedAxis}> </ExerciseGraph> : <IonCard> </IonCard>
                 }
 
                 <IonItem>
