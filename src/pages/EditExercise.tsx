@@ -1,14 +1,24 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonInput, IonButton, IonCardTitle, IonCard, IonRow, IonGrid, IonCol } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { updateHistory } from '../db';
+import { auth } from '../firebase';
 import { Set } from '../routine';
 import { getSelectedDate } from './Calendar';
 import { getExercise } from './CalendarDay';
-let uid = 'KznJACOrQoOeBo4SrZywbPc6KE72'
+
 const EditExercise: React.FC = () => {
 
+  const [userID, setUserID] = useState("");
   const [sets, setSets] = useState<Set[]>([]);  
+
+  useEffect(() => {
+      if (auth.currentUser != null) {
+          setUserID(auth.currentUser.uid);
+      } else {
+          setUserID("A4A2aPnIz2VH39FsbGkPwZnzYM43");
+      }
+  }, []);
 
   let state = useLocation().state
   let exercise = getExercise()
@@ -47,7 +57,7 @@ const EditExercise: React.FC = () => {
     var exHistory = exercise.history
     exHistory[getDateString()] = sets
     
-    updateHistory(uid, exercise.exerciseName, exHistory)
+    updateHistory(userID, exercise.exerciseName, exHistory)
     setSets([])
   }
 

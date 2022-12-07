@@ -2,43 +2,58 @@ import { IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, Ion
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getsUsersRoutines, readRoutine } from "../db"
+import { auth } from '../firebase';
 import { Routine } from "../routine"
 import "./Global.css"
 
-let uid = 'KznJACOrQoOeBo4SrZywbPc6KE72'
+const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
+
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const colors = ["skyblue", "bluishgreen", "vermilion", "yellow", "reddishpurple", "blue", "orange"]
-var colorMap : Map<string, string> = new Map<string, string>()
+var colorMap : Map<string, string>
 var date : Date 
 var week : string []
 var month : string [][]
 var workouts : string[]
 var routine_ : Routine
 
-const Tab1: React.FC = () => {
+const Calendar: React.FC = () => {
   let history = useHistory()
   
+  const [userID, setUserID] = useState("");
   const [routines, setRoutines] = useState<string[]>([])
   const [routineIndex, setRoutineIndex] = useState<number>(0)
   const [routine, setRoutine] = useState<Routine>() //in the useState function 
   const [monthOffset, setMonthOffset] = useState<number>(0)
+
+  useEffect(() => {
+      if (auth.currentUser != null) {
+          setUserID(auth.currentUser.uid);
+      } else {
+          setUserID("A4A2aPnIz2VH39FsbGkPwZnzYM43");
+      }
+  }, []);
   
   useEffect( () => {
 
     // Call getUserRoutines for string array and have a dropdown use this array for selection
-    getsUsersRoutines(uid).then((result) => setRoutines(result)).catch((err) => console.log(err))
+    if (userID != "") {
+      getsUsersRoutines(userID).then((result) => setRoutines(result)).catch((err) => console.log(err))
+    }
 
-  }, [])
+  }, [userID])
 
   useEffect( () => {
 
-    const getRoutine = (routine:any) => {
+    const getRoutine = (routine : any) => {
       return routine
     }
 
-    readRoutine(routines[routineIndex], uid).then((result) => setRoutine(getRoutine(result))).catch((err) => console.log(err))
+    if (routines.length != 0 && userID != "") {
+      readRoutine(routines[routineIndex], userID).then((result) => setRoutine(getRoutine(result))).catch((err) => console.log(err))
+    }
     
-  }, [routines])
+  }, [routines, routineIndex, userID])
 
   function ChooseDay (day: string) {
     date = new Date(monthYear.getFullYear(), monthYear.getMonth(), parseInt(day))
@@ -61,6 +76,7 @@ const Tab1: React.FC = () => {
     // get workout routine for a week
     week = ['','','','','','','']
     workouts = []
+    colorMap = new Map<string, string>()
     let i = 0
 
     routine.workouts.forEach((workout) => {
@@ -88,7 +104,7 @@ const Tab1: React.FC = () => {
     })
 
     workouts.push('Rest')
-    colorMap.set('Rest', colors[colorMap.size-2])
+    colorMap.set('Rest', colors[colorMap.size])
     colorMap.set('Other', 'medium')
 
     for (let i = 0; i < 7; i++) {
@@ -121,7 +137,6 @@ const Tab1: React.FC = () => {
     }
   }
 
-  
   return (
     <IonPage>
       <IonHeader>
@@ -133,11 +148,11 @@ const Tab1: React.FC = () => {
       {routine != undefined && <IonContent fullscreen>
         <IonCard>
           <IonCardTitle class="ion-text-center">
-            <IonSelect interface='popover' placeholder={routines[routineIndex]}>
-              {routines.length >= 1 && <IonSelectOption onClick={() => setRoutineIndex(0)} class="ion-text-center" value={routines[0]}>{routines[0]}</IonSelectOption>}
-              {routines.length >= 2 && <IonSelectOption onClick={() => setRoutineIndex(1)} class="ion-text-center" value={routines[1]}>{routines[1]}</IonSelectOption>}
-              {routines.length >= 3 && <IonSelectOption onClick={() => setRoutineIndex(2)} class="ion-text-center" value={routines[2]}>{routines[2]}</IonSelectOption>}
-              {routines.length >= 4 && <IonSelectOption onClick={() => setRoutineIndex(3)} class="ion-text-center" value={routines[3]}>{routines[3]}</IonSelectOption>}
+            <IonSelect interface='popover' onIonChange={(e : any) => setRoutineIndex(e.detail.value)} placeholder={routines[routineIndex]}>
+              {routines.length >= 1 && <IonSelectOption class="ion-text-center" value={0}>{routines[0]}</IonSelectOption>}
+              {routines.length >= 2 && <IonSelectOption class="ion-text-center" value={1}>{routines[1]}</IonSelectOption>}
+              {routines.length >= 3 && <IonSelectOption class="ion-text-center" value={2}>{routines[2]}</IonSelectOption>}
+              {routines.length >= 4 && <IonSelectOption class="ion-text-center" value={3}>{routines[3]}</IonSelectOption>}
             </IonSelect>
           </IonCardTitle>
         </IonCard>
@@ -241,4 +256,4 @@ const Tab1: React.FC = () => {
 
 export function getSelectedDate() { return date }
 export function getLoadedRoutine() { return routine_ }
-export default Tab1;
+export default Calendar;
