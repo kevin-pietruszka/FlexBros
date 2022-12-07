@@ -16,7 +16,6 @@ import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Tab1 from './pages/Calendar';
 import Routines from './pages/Routines';
-import RoutineMaker from './pages/RoutineMaker';
 import ExercisesStats from './pages/ExercisesStats';
 import EditWorkout from './pages/EditWorkout';
 import CreateWorkout from './pages/CreateWorkout';
@@ -108,7 +107,7 @@ const App: React.FC = () => (
             <IonLabel>Progress</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab4" href="/tab4">
-            <IonIcon src={progress_icon}>progress</IonIcon>
+            <IonIcon src={settings_icon}>progress</IonIcon>
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
         </IonTabBar>

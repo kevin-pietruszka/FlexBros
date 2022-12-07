@@ -24,13 +24,25 @@ import { Routine } from "../routine";
 
 interface makerProps {
     uid: string;
+    allowed: boolean;
 }
 
 const RoutineMaker = (props: makerProps) => {
+
+    const formatDate = (date: Date) => {
+
+        const y = date.getFullYear();
+        const m = date.getMonth() + 1;
+        const d = date.getDate();
+
+        return `${m}/${d}/${y}`
+    }
+
+
     const [isOpen, setIsOpen] = useState(false);
     const [page, setPage] = useState("routine");
     const [routine, setRoutine] = useState<Routine>(
-        new Routine("Routine Name", props.uid, (new Date()).toLocaleDateString(), [])
+        new Routine("Routine Name", props.uid, formatDate(new Date()), [])
     );
     const [workout, setWorkout] = useState(-1);
     const [exercise, setExercise] = useState(-1);
@@ -40,7 +52,7 @@ const RoutineMaker = (props: makerProps) => {
     }, [routine, page, isOpen, workout, exercise]);
 
     const onClose = () => {
-        const tmp = new Routine("Routine Name", props.uid, (new Date()).toLocaleDateString(), []);
+        const tmp = new Routine("Routine Name", props.uid, formatDate(new Date()), []);
         setRoutine(tmp);
         setPage("routine");
         setIsOpen(false);
@@ -59,9 +71,19 @@ const RoutineMaker = (props: makerProps) => {
             });
     };
 
+    const open = (e:any) => {
+
+        if (props.allowed) {
+            setIsOpen(true);
+        } else {
+            alert('You can not make another routine, consider upgrading');
+        }
+        
+    }
+
     return (
         <IonItem>
-            <IonItem button onClick={() => setIsOpen(true)}>
+            <IonItem button onClick={open}>
                 <IonText> Build a routine </IonText>
             </IonItem>
             <IonModal isOpen={isOpen} backdropDismiss={false}>
