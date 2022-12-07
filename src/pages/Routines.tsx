@@ -19,7 +19,6 @@ const Routines: React.FC = () => {
     const [userID, setUserID] = useState("");
     const [userRoutines, setUserRoutines] = useState([""]);
     const [loadingRoutines, setLoadingRoutines] = useState(true);
-    const [makeRoutine, setMakeRoutine] = useState(false);
 
     useEffect(() => {
         if (auth.currentUser != null) {
@@ -30,8 +29,6 @@ const Routines: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (userID === "") return;
-
         getsUsersRoutines(userID).then((res) => {
             setUserRoutines([...res]);
         });
@@ -41,58 +38,39 @@ const Routines: React.FC = () => {
         setLoadingRoutines(false);
     }, [userRoutines]);
 
-    const handleEndMaker = () => {
-        setMakeRoutine(false);
-    }
-
     return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
                     <IonTitle class="ion-text-center">Routines</IonTitle>
-                    {loadingRoutines ? (
+                    {loadingRoutines && (
                         <IonProgressBar type="indeterminate"></IonProgressBar>
-                    ) : (
-                        <></>
                     )}
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                {makeRoutine ? (
-                    <RoutineMaker backToRoutines={handleEndMaker}> </RoutineMaker>
-                ) : (
-                    <IonContent>
-                        <IonHeader collapse="condense">
-                            <IonToolbar>
-                                <IonTitle size="large">Routines</IonTitle>
-                            </IonToolbar>
-                        </IonHeader>
-                        <IonCard>
-                            <IonList>
-                                <IonItem>
-                                    <IonTitle>Routine list</IonTitle>
-                                </IonItem>
-                                {!loadingRoutines ? (
-                                    userRoutines.map((val, index) => {
-                                        return (
-                                            <IonItem key={index}>
-                                                {" "}
-                                                {val}{" "}
-                                            </IonItem>
-                                        );
-                                    })
-                                ) : (
-                                    <></>
-                                )}
-                            </IonList>
-                        </IonCard>
+                <IonContent>
+                    <IonHeader collapse="condense">
+                        <IonToolbar>
+                            <IonTitle size="large">Routines</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+                    <IonCard>
                         <IonList>
-                            <IonButton onClick={() => setMakeRoutine(true)}>
-                                Make a new routine
-                            </IonButton>
+                            <IonItem>
+                                <IonTitle>Routine list</IonTitle>
+                            </IonItem>
+                            {!loadingRoutines && (
+                                userRoutines.map((val, index) => {
+                                    return (
+                                        <IonItem key={index}> {val} </IonItem>
+                                    );
+                                })
+                            )}
                         </IonList>
-                    </IonContent>
-                )}
+                    </IonCard>
+                    <RoutineMaker uid={userID}/>
+                </IonContent>
             </IonContent>
         </IonPage>
     );

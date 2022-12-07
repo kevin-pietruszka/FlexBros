@@ -9,67 +9,95 @@ import {
     IonCard,
     IonInput,
     IonItem,
+    IonText,
+    IonModal,
+    IonButtons,
+    InputChangeEventDetail,
+    IonLabel,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
-import { auth } from "../firebase";
+import ExerciseContent from "../components/ExerciseContent";
+import RoutineContent from "../components/routineContent";
+import WorkoutContent from "../components/workoutContent";
+import { Routine } from "../routine";
 
+interface makerProps {
+    uid: string;
+}
 
-const RoutineMaker = (props: any) => {
-
-    const [userID, setUserID] = useState("");
-    const [routineName, setRoutineName] = useState("");
+const RoutineMaker = (props: makerProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [page, setPage] = useState("routine");
+    const [routine, setRoutine] = useState<Routine>(
+        new Routine("Routine Name", props.uid, "", [])
+    );
+    const [workout, setWorkout] = useState(-1);
+    const [exercise, setExercise] = useState(-1);
 
     useEffect(() => {
-        if (auth.currentUser != null) {
-            setUserID(auth.currentUser.uid);
-        } else {
-            setUserID("A4A2aPnIz2VH39FsbGkPwZnzYM43");
-        }
+        console.log("Changed routine");
 
-    }, []);
+        return () => {};
+    }, [routine]);
 
-    useEffect(() => {
-        console.log(`${userID}: ${routineName}`);
-    }, [userID, routineName])
-    
-
-    const routineNameInput = (e: any) => {
-        setRoutineName(e.detail.value);
+    const onClose = () => {
+        const tmp = new Routine("Routine Name", props.uid, "", []);
+        setRoutine(tmp);
+        setPage("routine");
+        setIsOpen(false);
     };
 
     return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle class="ion-text-center">Routine Maker</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent fullscreen>
-                <IonHeader collapse="condense">
+        <IonItem>
+            <IonItem button onClick={() => setIsOpen(true)}>
+                <IonText> Build a routine </IonText>
+            </IonItem>
+            <IonModal isOpen={isOpen} backdropDismiss={false}>
+                <IonHeader>
                     <IonToolbar>
-                        <IonTitle size="large">Routine Maker</IonTitle>
+                        <IonItem>
+                            <IonTitle> Routine Builder </IonTitle>
+                            <IonButton slot="end" onClick={onClose}>
+                                Close
+                            </IonButton>
+                        </IonItem>
                     </IonToolbar>
                 </IonHeader>
-                <IonCard>
-                    <IonItem>
-                        <IonInput
-                            onIonChange={routineNameInput}
-                            placeholder="Name of routine"
-                        ></IonInput>
-                    </IonItem>
-                    <IonList>
-                        <IonItem>
-                            <IonTitle>Workouts</IonTitle>
-                        </IonItem>
-                        <IonItem>
-                            <IonContent>begin list of workouts</IonContent>
-                            <IonButton id="remove_button">Remove</IonButton>
-                        </IonItem>
-                    </IonList>
-                    <IonButton onClick={props.backToRoutines}> Finish </IonButton>
-                </IonCard>
-            </IonContent>
-        </IonPage>
+                {page === "routine" && (
+                    <RoutineContent
+                        uid={props.uid}
+                        routine={routine}
+                        setRoutine={setRoutine}
+                        setPage={setPage}
+                        setWorkout={setWorkout}
+                    ></RoutineContent>
+                )}
+                {page === "workout" && (
+                    <WorkoutContent
+                        uid={props.uid}
+                        routine={routine}
+                        setRoutine={setRoutine}
+                        setPage={setPage}
+                        workoutIndex={workout}
+                        setExercise={setExercise}
+                    ></WorkoutContent>
+                )}
+                {page === "exercise" && (
+                    <ExerciseContent
+                        uid={props.uid}
+                        routine={routine}
+                        setRoutine={setRoutine}
+                        setPage={setPage}
+                        workoutIndex={workout}
+                        exerciseIndex={exercise}
+                    ></ExerciseContent>
+                )}
+                <IonButton onClick={() => console.log(routine)}>
+                    {" "}
+                    Debug{" "}
+                </IonButton>
+            </IonModal>
+        </IonItem>
     );
 };
 

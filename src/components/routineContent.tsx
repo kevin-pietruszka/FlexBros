@@ -60,7 +60,7 @@ const RoutineContent = (props: contentProps) => {
             <IonItem>
                 <IonLabel> Routine Name: </IonLabel>
                 <IonInput
-                    placeholder="Click to change routine name"
+                    value={props.routine.routineName}
                     onIonChange={changeName}
                 ></IonInput>
             </IonItem>
