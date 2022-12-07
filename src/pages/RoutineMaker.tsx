@@ -27,10 +27,21 @@ interface makerProps {
 }
 
 const RoutineMaker = (props: makerProps) => {
+
+    const formatDate = (date: Date) => {
+
+        const y = date.getFullYear();
+        const m = date.getMonth() + 1;
+        const d = date.getDate();
+
+        return `${m}/${d}/${y}`
+    }
+
+
     const [isOpen, setIsOpen] = useState(false);
     const [page, setPage] = useState("routine");
     const [routine, setRoutine] = useState<Routine>(
-        new Routine("Routine Name", props.uid, (new Date()).toLocaleDateString(), [])
+        new Routine("Routine Name", props.uid, formatDate(new Date()), [])
     );
     const [workout, setWorkout] = useState(-1);
     const [exercise, setExercise] = useState(-1);
@@ -40,7 +51,7 @@ const RoutineMaker = (props: makerProps) => {
     }, [routine, page, isOpen, workout, exercise]);
 
     const onClose = () => {
-        const tmp = new Routine("Routine Name", props.uid, (new Date()).toLocaleDateString(), []);
+        const tmp = new Routine("Routine Name", props.uid, formatDate(new Date()), []);
         setRoutine(tmp);
         setPage("routine");
         setIsOpen(false);
