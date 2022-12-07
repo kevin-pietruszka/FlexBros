@@ -4,7 +4,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { Exercise, Workout } from '../routine';
 import { getSelectedDate, getLoadedRoutine } from './Calendar';
 
-const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const daysOfWeeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 var date_ : Date = getSelectedDate()
