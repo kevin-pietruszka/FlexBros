@@ -1,50 +1,72 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton, IonCard, IonInput, IonItem } from '@ionic/react';
+import { IonCardTitle, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButton, IonRow, IonList, IonGrid, IonCol, IonItem, IonLabel, IonItemDivider } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
+import { Routine, Workout, Exercise } from "../routine"
+import { getsUsersRoutines, readRoutine, createRoutine, checkPaidUser } from "../db"
+import React, { useState, useEffect, useContext } from 'react';
+import './Tab2.css';
+import trash_icon from './icons/trash-outline.svg';
+import { RoutineContext } from './Routines';
+export const WorkoutContext = React.createContext({} as Workout);
+
 
 const RoutineMaker: React.FC = () => {
 
-  //TODO
-  // implement posting routine to database
-  //    get data (user id, name, array of workouts)
-  //    use data to create a routien object
-  //    pass that object to createRoutine function from db.ts
+  const routine = useContext(RoutineContext);
+  const [workouts,setWorkouts] = useState<Workout[]>([]);
+  const [name, setName] = useState([routine.routineName, false]);
+
+  const createWorkout = function( days: string[]) {
+    const name = "Workout" + (workouts.length + 1);
+    const newWorkout = new Workout(name, routine.userID, days, []);
+    setWorkouts([...workouts, newWorkout]);
+  }
   
-  const finishRoutine = async () => {
-    // on finish save routine and post to database
-  };
+  function remove(idx: number) {
+    var workoutsCopy = workouts;
+    workoutsCopy.splice(idx, 1);
+    setWorkouts(workoutsCopy)
+  }
+
+  function setRoutine(name: any) {
+    routine.routineName = name[0];
+    routine.workouts = workouts;
+  }
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle class="ion-text-center">Routine Maker</IonTitle>
+          <IonTitle>Routine Maker</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Routine Maker</IonTitle>
+          <IonButton id="Edit Name" onClick={()=>setName([routine.routineName, true])}></IonButton>
+              {name[1] ? <IonInput onIonInput={(e: any) => setName([e, false])}>{name[0]}</IonInput> : <IonLabel>{name[0]}</IonLabel>}
           </IonToolbar>
         </IonHeader>
-        <IonCard>
-          <IonItem>
-            <IonInput placeholder='Name of routine'></IonInput>
-          </IonItem>
-          <IonList>
-            <IonItem>
-              <IonTitle>Workouts</IonTitle>
-            </IonItem>
-            <IonItem>
-              <IonContent>begin list of workouts</IonContent>
-              <IonButton id="remove_button">Remove</IonButton>
-            </IonItem>
-          </IonList>
-          <IonButton routerLink="/EditWorkout">Edit</IonButton>
-          <IonButton onClick = {() => finishRoutine} routerLink="/Routines">Finish</IonButton>
-        </IonCard>
+        <IonContent>
+          {workouts.map((workout, idx) => {
+            return (
+              <IonItem key={idx}>
+                <WorkoutContext.Provider value={workouts[idx]}>
+                <IonLabel>{workout.workoutName}</IonLabel>
+                <IonButton routerLink='/EditAWorkout'></IonButton>
+                <IonButton id='delete' onClick={() => remove(idx)}>{trash_icon}</IonButton>
+                </WorkoutContext.Provider>
+              </IonItem>
+            )
+          })}
+        </IonContent>
+        <IonButton id="addWorkout" onClick={createWorkout([])} routerLink="/EditAWorkout">+</IonButton>
+        <IonButton id="Finish" onClick={() => setRoutine(name)} routerLink="/Routines">Finish</IonButton>
       </IonContent>
     </IonPage>
   );
 };
 
 export default RoutineMaker;
+export function getWorkout() {
+  return 
+}
