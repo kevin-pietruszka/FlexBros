@@ -59,6 +59,16 @@ ion-select {
 	height: 35px
 }
 
+#banner_ad {
+	background-image: url('../icons/banner.webp');
+	height: 50px;
+	background-size: 100%;
+}
+
+ion-header {
+	margin-top: 50px
+}
+  
 :root {
 	--ion-color-blue: #0072B2;
 	--ion-color-blue-rgb: 0,114,178;

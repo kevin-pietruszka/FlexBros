@@ -109,7 +109,7 @@ const App: React.FC = () => (
             <IonLabel>Progress</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab4" href="/tab4">
-            <IonIcon src={progress_icon}>progress</IonIcon>
+            <IonIcon src={settings_icon}>progress</IonIcon>
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
         </IonTabBar> 
