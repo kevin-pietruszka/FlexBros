@@ -14,38 +14,36 @@ import { useEffect, useState } from "react";
 import { changeToPaidStatus, checkPaidUser } from "../db";
 import { auth } from "../firebase";
 
-
 const Premium: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [changingVersion, setChangingVersion] = useState(false);
     const [loading, setLoading] = useState(true);
     const [premiumStatus, setPremiumStatus] = useState(false);
-    const [userID, setUserID] = useState('');
+    const [userID, setUserID] = useState("");
 
     useEffect(() => {
-
         if (auth.currentUser == null) {
-            setUserID('A4A2aPnIz2VH39FsbGkPwZnzYM43');
+            setUserID("A4A2aPnIz2VH39FsbGkPwZnzYM43");
             return;
         } else {
-            setUserID(auth.currentUser.uid)
+            setUserID(auth.currentUser.uid);
         }
-
     }, []);
 
     useEffect(() => {
-
-        if (userID === '') return;
+        if (userID === "") return;
 
         checkPaidUser(userID).then((res) => {
-            
             setPremiumStatus(res);
-            console.log(res);
-            setLoading(false)
+            
+            setLoading(false);
         });
+    }, [userID]);
 
-    }, [userID])
-    
+    useEffect(() => {
+
+        return () => {};
+    }, [premiumStatus]);
 
     const changePremium = () => {
         setChangingVersion(true);
@@ -55,9 +53,8 @@ const Premium: React.FC = () => {
                 setPremiumStatus(!premiumStatus);
                 setChangingVersion(false);
             }
-        })
-
-    }
+        });
+    };
 
     return (
         <IonItem>
@@ -69,7 +66,7 @@ const Premium: React.FC = () => {
                     <IonToolbar>
                         <IonTitle> Premium Account </IonTitle>
                         <IonButtons slot="end">
-                            {changingVersion ? (
+                            {changingVersion || loading ? (
                                 <IonButton disabled={true}>Close</IonButton>
                             ) : (
                                 <IonButton onClick={() => setIsOpen(false)}>
@@ -78,7 +75,7 @@ const Premium: React.FC = () => {
                             )}
                         </IonButtons>
 
-                        {changingVersion ? (
+                        {changingVersion || loading ? (
                             <IonProgressBar type="indeterminate">
                                 {" "}
                             </IonProgressBar>
@@ -89,10 +86,20 @@ const Premium: React.FC = () => {
                 </IonHeader>
                 <IonContent className="ion-padding">
                     <IonItem>
-                        <IonText> Change to premium version: current status {premiumStatus ? 'Premium': 'Scrub'} </IonText>
-                        
-                        {changingVersion ? <IonButton disabled={true}> Switch</IonButton>: <IonButton onClick={changePremium}> Switch </IonButton>}
-                        
+                        <IonText>
+                            {" "}
+                            You are a {premiumStatus ? "Premium" : "Scrub"} member, change status?
+                            
+                        </IonText>
+
+                        {changingVersion ? (
+                            <IonButton slot ='end' disabled={true}> Switch </IonButton>
+                        ) : (
+                            <IonButton slot='end' onClick={changePremium}>
+                                {" "}
+                                Switch{" "}
+                            </IonButton>
+                        )}
                     </IonItem>
                 </IonContent>
             </IonModal>

@@ -8,7 +8,7 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 
-const ExerciseGraph: React.FC<{chartData: any, children: React.ReactNode}> = ({chartData}) => {
+const ExerciseGraph: React.FC<{chartData: any, yaxis:string, children: React.ReactNode}> = ({chartData, yaxis}) => {
 
     const chartConfigs = {
         type: "column2d", // The chart type
@@ -19,11 +19,9 @@ const ExerciseGraph: React.FC<{chartData: any, children: React.ReactNode}> = ({c
           // Chart Configuration
           chart: {
             caption: "Exercise History",    //Set the chart caption
-            subCaption: "In MMbbl = One Million barrels",             //Set the chart subcaption
+            subCaption: "See your progress!",             //Set the chart subcaption
             xAxisName: "Day",           //Set the x-axis name
-            yAxisName: "Reps",  //Set the y-axis name
-            numberSuffix: "K",
-            theme: "fusion"                 //Set the theme for your chart
+            yAxisName: yaxis,  //Set the y-axis name
           },
           // Chart Data - from step 2
           data: chartData
