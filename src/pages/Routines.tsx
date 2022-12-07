@@ -11,7 +11,7 @@ import {
     IonProgressBar,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { getsUsersRoutines } from "../db";
+import { checkPaidUser, getsUsersRoutines } from "../db";
 import { auth } from "../firebase";
 import RoutineMaker from "./RoutineMaker";
 
@@ -19,6 +19,7 @@ const Routines: React.FC = () => {
     const [userID, setUserID] = useState("");
     const [userRoutines, setUserRoutines] = useState([""]);
     const [loadingRoutines, setLoadingRoutines] = useState(true);
+    const [paid, setPaid] = useState(false);
 
     useEffect(() => {
         if (auth.currentUser != null) {
@@ -32,6 +33,9 @@ const Routines: React.FC = () => {
         getsUsersRoutines(userID).then((res) => {
             setUserRoutines([...res]);
         });
+        checkPaidUser(userID).then((res)=>{
+            setPaid(res);
+        })
     }, [userID]);
 
     useEffect(() => {
@@ -69,7 +73,7 @@ const Routines: React.FC = () => {
                             )}
                         </IonList>
                     </IonCard>
-                    <RoutineMaker uid={userID}/>
+                    <RoutineMaker uid={userID} allowed={paid || userRoutines.length < 1}/>
                 </IonContent>
             </IonContent>
         </IonPage>

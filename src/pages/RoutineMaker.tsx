@@ -24,6 +24,7 @@ import { Routine } from "../routine";
 
 interface makerProps {
     uid: string;
+    allowed: boolean;
 }
 
 const RoutineMaker = (props: makerProps) => {
@@ -70,9 +71,19 @@ const RoutineMaker = (props: makerProps) => {
             });
     };
 
+    const open = (e:any) => {
+
+        if (props.allowed) {
+            setIsOpen(true);
+        } else {
+            alert('You can not make another routine, consider upgrading');
+        }
+        
+    }
+
     return (
         <IonItem>
-            <IonItem button onClick={() => setIsOpen(true)}>
+            <IonItem button onClick={open}>
                 <IonText> Build a routine </IonText>
             </IonItem>
             <IonModal isOpen={isOpen} backdropDismiss={false}>
