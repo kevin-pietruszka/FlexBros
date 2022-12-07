@@ -1,7 +1,6 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
-  IonFooter,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
@@ -78,6 +77,9 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
+          <Route exact path="/RoutineMaker">
+            <RoutineMaker />
+          </Route>
           <Route exact path="/EditWorkout">
             <EditWorkout />
           </Route>
@@ -108,11 +110,9 @@ const App: React.FC = () => (
             <IonIcon src={settings_icon}>progress</IonIcon>
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
-        </IonTabBar> 
+        </IonTabBar>
       </IonTabs>
     </IonReactRouter>
-    <IonFooter id="banner_ad" slot="bottom">
-    </IonFooter>
   </IonApp>
 );
 
