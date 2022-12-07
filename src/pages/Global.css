@@ -54,6 +54,11 @@ ion-select {
 	width: 135px
 }
 
+#color_button {
+	width: 35px;
+	height: 35px
+}
+
 :root {
 	--ion-color-blue: #0072B2;
 	--ion-color-blue-rgb: 0,114,178;
