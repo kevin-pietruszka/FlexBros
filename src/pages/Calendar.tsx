@@ -1,30 +1,32 @@
-import { IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButton, IonRow, IonGrid, IonCol, IonSelect, IonSelectOption, IonProgressBar } from '@ionic/react';
+import { IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButton, IonRow, IonGrid, IonCol, IonSelect, IonSelectOption, IonProgressBar, IonPopover } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getsUsersRoutines, readRoutine } from "../db"
+import { checkPaidUser, getsUsersRoutines, readRoutine } from "../db"
 import { auth } from '../firebase';
 import { Routine } from "../routine"
 import "./Global.css"
 
-const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
-
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-const colors = ["skyblue", "bluishgreen", "vermilion", "yellow", "reddishpurple", "blue", "orange"]
 var colorMap : Map<string, string>
+var workoutMap : Map<string, string>
 var date : Date 
 var week : string []
 var month : string [][]
 var workouts : string[]
 var routine_ : Routine
+var workoutIndex : number 
 
 const Calendar: React.FC = () => {
   let history = useHistory()
   
   const [userID, setUserID] = useState("");
+  const [premiumStatus, setPremiumStatus] = useState(false);
   const [routines, setRoutines] = useState<string[]>([])
   const [routineIndex, setRoutineIndex] = useState<number>(0)
   const [routine, setRoutine] = useState<Routine>() //in the useState function 
   const [monthOffset, setMonthOffset] = useState<number>(0)
+  const [colors, setColors] = useState<string[]>(["skyblue", "bluishgreen", "vermilion", "yellow", "reddishpurple", "blue", "orange"])
+  const [showPopover, setShowPopover] = useState<boolean>(false)
 
   useEffect(() => {
       if (auth.currentUser != null) {
@@ -37,8 +39,10 @@ const Calendar: React.FC = () => {
   useEffect( () => {
 
     // Call getUserRoutines for string array and have a dropdown use this array for selection
-    if (userID != "") {
+    if (userID !== "") {
       getsUsersRoutines(userID).then((result) => setRoutines(result)).catch((err) => console.log(err))
+
+      checkPaidUser(userID).then((result) => setPremiumStatus(result));
     }
 
   }, [userID])
@@ -53,7 +57,33 @@ const Calendar: React.FC = () => {
       readRoutine(routines[routineIndex], userID).then((result) => setRoutine(getRoutine(result))).catch((err) => console.log(err))
     }
     
-  }, [routines, routineIndex, userID])
+  }, [routines, routineIndex, userID, colors])
+
+  function swapColors(workoutIndex : number, newColor : string) {
+    let workout = workouts[workoutIndex]
+    let oldColor = colorMap.get(workout)
+
+    var colorIndex1 = -1
+    var colorIndex2 = -1
+    
+    for (let i = 0; i < colors.length; i++) {
+      if (colors[i] === newColor) {
+        colorIndex1 = i
+      } else if (colors[i] === oldColor) {
+        colorIndex2 = i
+      }
+    }
+
+    var newColors = colors
+
+    newColors[colorIndex2] = newColor
+    if (oldColor != undefined) {
+      newColors[colorIndex1] = oldColor
+    }
+
+    setColors(newColors)
+    setShowPopover(false)
+  }
 
   function ChooseDay (day: string) {
     date = new Date(monthYear.getFullYear(), monthYear.getMonth(), parseInt(day))
@@ -77,11 +107,13 @@ const Calendar: React.FC = () => {
     week = ['','','','','','','']
     workouts = []
     colorMap = new Map<string, string>()
+    workoutMap = new Map<string, string>()
     let i = 0
 
     routine.workouts.forEach((workout) => {
       workouts.push(workout.workoutName)
       colorMap.set(workout.workoutName, colors[i])
+      workoutMap.set(colors[i], workout.workoutName)
       i++
 
       workout.days.forEach((day) => {
@@ -148,12 +180,13 @@ const Calendar: React.FC = () => {
       {routine != undefined && <IonContent fullscreen>
         <IonCard>
           <IonCardTitle class="ion-text-center">
-            <IonSelect interface='popover' onIonChange={(e : any) => setRoutineIndex(e.detail.value)} placeholder={routines[routineIndex]}>
+            {premiumStatus && <IonSelect interface='popover' onIonChange={(e : any) => setRoutineIndex(e.detail.value)} placeholder={routines[routineIndex]}>
               {routines.length >= 1 && <IonSelectOption class="ion-text-center" value={0}>{routines[0]}</IonSelectOption>}
               {routines.length >= 2 && <IonSelectOption class="ion-text-center" value={1}>{routines[1]}</IonSelectOption>}
               {routines.length >= 3 && <IonSelectOption class="ion-text-center" value={2}>{routines[2]}</IonSelectOption>}
               {routines.length >= 4 && <IonSelectOption class="ion-text-center" value={3}>{routines[3]}</IonSelectOption>}
-            </IonSelect>
+            </IonSelect>}
+            {!premiumStatus && routines[routineIndex]}
           </IonCardTitle>
         </IonCard>
         <IonCard>
@@ -236,14 +269,31 @@ const Calendar: React.FC = () => {
           </IonGrid>
         </IonCard>
         <IonCard class="ion-text-center">
-          {workouts.length >= 1 && <IonButton ng-disabled={true} color={colorMap.get(workouts[0])}>{workouts[0]}</IonButton>}
-          {workouts.length >= 2 && <IonButton ng-disabled={true} color={colorMap.get(workouts[1])}>{workouts[1]}</IonButton>}
-          {workouts.length >= 3 && <IonButton ng-disabled={true} color={colorMap.get(workouts[2])}>{workouts[2]}</IonButton>}
-          {workouts.length >= 4 && <IonButton ng-disabled={true} color={colorMap.get(workouts[3])}>{workouts[3]}</IonButton>}
-          {workouts.length >= 5 && <IonButton ng-disabled={true} color={colorMap.get(workouts[4])}>{workouts[4]}</IonButton>}
-          {workouts.length >= 6 && <IonButton ng-disabled={true} color={colorMap.get(workouts[5])}>{workouts[5]}</IonButton>}
-          {workouts.length >= 7 && <IonButton ng-disabled={true} color={colorMap.get(workouts[6])}>{workouts[6]}</IonButton>}
+          {workouts.length >= 1 && <IonButton onClick={() => {workoutIndex = 0; setShowPopover(true)}} color={colorMap.get(workouts[0])}>{workouts[0]}</IonButton>}
+          {workouts.length >= 2 && <IonButton onClick={() => {workoutIndex = 1; setShowPopover(true)}} color={colorMap.get(workouts[1])}>{workouts[1]}</IonButton>}
+          {workouts.length >= 3 && <IonButton onClick={() => {workoutIndex = 2; setShowPopover(true)}} color={colorMap.get(workouts[2])}>{workouts[2]}</IonButton>}
+          {workouts.length >= 4 && <IonButton onClick={() => {workoutIndex = 3; setShowPopover(true)}} color={colorMap.get(workouts[3])}>{workouts[3]}</IonButton>}
+          {workouts.length >= 5 && <IonButton onClick={() => {workoutIndex = 4; setShowPopover(true)}} color={colorMap.get(workouts[4])}>{workouts[4]}</IonButton>}
+          {workouts.length >= 6 && <IonButton onClick={() => {workoutIndex = 5; setShowPopover(true)}} color={colorMap.get(workouts[5])}>{workouts[5]}</IonButton>}
+          {workouts.length >= 7 && <IonButton onClick={() => {workoutIndex = 6; setShowPopover(true)}} color={colorMap.get(workouts[6])}>{workouts[6]}</IonButton>}
         </IonCard>
+        <IonPopover class="ion-text-center" isOpen={showPopover} onDidDismiss={e => setShowPopover(false)}> Choose Workout Color
+            <IonGrid class="ion-text-center">
+              <IonRow>
+                <IonCol><IonButton onClick={() => swapColors(workoutIndex,"skyblue")} id="color_button" color={"skyblue"}></IonButton></IonCol>
+                <IonCol><IonButton onClick={() => swapColors(workoutIndex,"bluishgreen")} id="color_button" color={"bluishgreen"}></IonButton></IonCol>
+                <IonCol><IonButton onClick={() => swapColors(workoutIndex,"vermilion")} id="color_button" color={"vermilion"}></IonButton></IonCol>
+                <IonCol><IonButton onClick={() => swapColors(workoutIndex,"yellow")} id="color_button" color={"yellow"}></IonButton></IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol><IonButton onClick={() => swapColors(workoutIndex,"reddishpurple")} id="color_button" color={"reddishpurple"}></IonButton></IonCol>
+                <IonCol><IonButton onClick={() => swapColors(workoutIndex,"blue")} id="color_button" color={"blue"}></IonButton></IonCol>
+                <IonCol><IonButton onClick={() => swapColors(workoutIndex,"orange")} id="color_button" color={"orange"}></IonButton></IonCol>
+              </IonRow>
+              <IonRow>
+              </IonRow>
+            </IonGrid>
+          </IonPopover>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Tab 1</IonTitle>
