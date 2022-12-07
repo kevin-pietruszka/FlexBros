@@ -5,7 +5,8 @@ import { updateHistory } from '../db';
 import { Set } from '../routine';
 import { getSelectedDate } from './Calendar';
 import { getExercise } from './CalendarDay';
-let uid = 'KznJACOrQoOeBo4SrZywbPc6KE72'
+
+const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
 const EditExercise: React.FC = () => {
 
   const [sets, setSets] = useState<Set[]>([]);  

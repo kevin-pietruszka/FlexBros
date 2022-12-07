@@ -50,6 +50,16 @@ ion-select {
     color: black;
 }
 
+#banner_ad {
+    background-image: url('../icons/banner.webp');
+	height: 50px;
+	background-size: 100%;
+}
+
+ion-header {
+	margin-top: 50px;
+}
+
 #exercise_button {
 	width: 150px
 }

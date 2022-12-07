@@ -5,7 +5,8 @@ import { getsUsersRoutines, readRoutine } from "../db"
 import { Routine } from "../routine"
 import "./Global.css"
 
-let uid = 'KznJACOrQoOeBo4SrZywbPc6KE72'
+const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
+
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const colors = ["skyblue", "bluishgreen", "vermilion", "yellow", "reddishpurple", "blue", "orange"]
 var colorMap : Map<string, string> = new Map<string, string>()
@@ -121,7 +122,6 @@ const Tab1: React.FC = () => {
     }
   }
 
-  
   return (
     <IonPage>
       <IonHeader>
