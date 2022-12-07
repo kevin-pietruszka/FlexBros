@@ -55,7 +55,13 @@ ion-select {
 }
 
 #banner_ad {
-	background-image: url(../icons/banner.webp);
+	background-image: url('../icons/banner.webp');
+	height: 50px;
+	background-size: 100%;
+}
+
+ion-header {
+	margin-top: 50px;
 }
 
 :root {
