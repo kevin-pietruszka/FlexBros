@@ -19,6 +19,7 @@ import { useState, useEffect } from "react";
 import ExerciseContent from "../components/ExerciseContent";
 import RoutineContent from "../components/routineContent";
 import WorkoutContent from "../components/workoutContent";
+import { uploadRoutine } from "../db";
 import { Routine } from "../routine";
 
 interface makerProps {
@@ -29,22 +30,33 @@ const RoutineMaker = (props: makerProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [page, setPage] = useState("routine");
     const [routine, setRoutine] = useState<Routine>(
-        new Routine("Routine Name", props.uid, "", [])
+        new Routine("Routine Name", props.uid, (new Date()).toLocaleDateString(), [])
     );
     const [workout, setWorkout] = useState(-1);
     const [exercise, setExercise] = useState(-1);
 
     useEffect(() => {
-        console.log("Changed routine");
-
         return () => {};
-    }, [routine]);
+    }, [routine, page, isOpen, workout, exercise]);
 
     const onClose = () => {
-        const tmp = new Routine("Routine Name", props.uid, "", []);
+        const tmp = new Routine("Routine Name", props.uid, (new Date()).toLocaleDateString(), []);
         setRoutine(tmp);
         setPage("routine");
         setIsOpen(false);
+    };
+
+    const finishRoutine = () => {
+        setPage("submitting");
+
+        uploadRoutine(routine)
+            .then((res) => {
+                console.log(res);
+                onClose();
+            })
+            .catch((err) => {
+                setPage("routine");
+            });
     };
 
     return (
@@ -70,6 +82,7 @@ const RoutineMaker = (props: makerProps) => {
                         setRoutine={setRoutine}
                         setPage={setPage}
                         setWorkout={setWorkout}
+                        finishRoutine={finishRoutine}
                     ></RoutineContent>
                 )}
                 {page === "workout" && (
@@ -92,10 +105,6 @@ const RoutineMaker = (props: makerProps) => {
                         exerciseIndex={exercise}
                     ></ExerciseContent>
                 )}
-                <IonButton onClick={() => console.log(routine)}>
-                    {" "}
-                    Debug{" "}
-                </IonButton>
             </IonModal>
         </IonItem>
     );

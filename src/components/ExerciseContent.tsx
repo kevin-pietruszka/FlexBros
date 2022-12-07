@@ -65,6 +65,10 @@ const ExerciseContent = (props: contentProps) => {
         props.setRoutine((routine) => ({ ...routine, workouts: copy }));
     }
 
+    const backButton = () => {
+        props.setPage('workout')
+    }
+
     return (
         <IonContent className="ion-padding">
             <IonItem>
@@ -100,7 +104,7 @@ const ExerciseContent = (props: contentProps) => {
                     );
                 })}
             </IonList>
-
+            <IonButton onClick={backButton}> Back </IonButton>
             <IonButton onClick={addSet}> Add Set </IonButton>
         </IonContent>
     );

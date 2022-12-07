@@ -23,6 +23,7 @@ interface contentProps {
     setRoutine: React.Dispatch<React.SetStateAction<Routine>>;
     setPage: React.Dispatch<React.SetStateAction<string>>;
     setWorkout: React.Dispatch<React.SetStateAction<number>>;
+    finishRoutine: Function;
 }
 
 const RoutineContent = (props: contentProps) => {
@@ -54,6 +55,10 @@ const RoutineContent = (props: contentProps) => {
         props.setWorkout(idx);
         props.setPage("workout");
     };
+
+    const finish = (e: any) => {
+        props.finishRoutine();
+    }
 
     return (
         <IonContent className="ion-padding">
@@ -93,6 +98,7 @@ const RoutineContent = (props: contentProps) => {
                 })}
             </IonList>
             <IonButton onClick={addWorkout}>Add Workout</IonButton>
+            <IonButton onClick={finish}>Finish</IonButton>
         </IonContent>
     );
 };
