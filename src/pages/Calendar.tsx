@@ -1,11 +1,12 @@
-import { IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButton, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonSelect, IonSelectOption, IonProgressBar } from '@ionic/react';
-import { Routine } from "../routine"
-import { getsUsersRoutines, readRoutine } from "../db"
+import { IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButton, IonRow, IonGrid, IonCol, IonSelect, IonSelectOption, IonProgressBar } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
-import "./Global.css"
 import { useHistory } from 'react-router-dom';
+import { getsUsersRoutines, readRoutine } from "../db"
+import { Routine } from "../routine"
+import "./Global.css"
 
 const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
+
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const colors = ["skyblue", "bluishgreen", "vermilion", "yellow", "reddishpurple", "blue", "orange"]
 var colorMap : Map<string, string> = new Map<string, string>()
@@ -63,7 +64,6 @@ const Tab1: React.FC = () => {
     workouts = []
     let i = 0
 
-    console.log(colorMap)
     routine.workouts.forEach((workout) => {
       workouts.push(workout.workoutName)
       colorMap.set(workout.workoutName, colors[i])
@@ -97,7 +97,6 @@ const Tab1: React.FC = () => {
         week[i] = 'Rest'
       }
     }
-    console.log(colorMap)
   
     month = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]  ]
 
@@ -123,7 +122,6 @@ const Tab1: React.FC = () => {
     }
   }
 
-  console.log(colorMap)
   return (
     <IonPage>
       <IonHeader>
@@ -241,6 +239,6 @@ const Tab1: React.FC = () => {
   );
 };
 
-export function getSelectedDate() {return date}
-export function getLoadedRoutine() {return routine_}
+export function getSelectedDate() { return date }
+export function getLoadedRoutine() { return routine_ }
 export default Tab1;

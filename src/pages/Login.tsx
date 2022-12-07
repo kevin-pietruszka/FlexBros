@@ -17,6 +17,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useHistory } from "react-router";
 
+var uid : string
+
 const Login: React.FC = () => {
     let history = useHistory();
 
@@ -88,4 +90,5 @@ const Login: React.FC = () => {
     );
 };
 
+export function getUID() { return uid }
 export default Login;

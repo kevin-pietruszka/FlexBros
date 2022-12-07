@@ -1,13 +1,12 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonInput, IonButton, IonCardTitle, IonCard, IonRow, IonGrid, IonCol } from '@ionic/react';
 import { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { updateHistory } from '../db';
-import { Exercise, Set } from '../routine';
-import { getExercise } from './CalendarDay';
+import { Set } from '../routine';
 import { getSelectedDate } from './Calendar';
+import { getExercise } from './CalendarDay';
 
 const uid = "A4A2aPnIz2VH39FsbGkPwZnzYM43"
-
 const EditExercise: React.FC = () => {
 
   const [sets, setSets] = useState<Set[]>([]);  
@@ -151,9 +150,10 @@ const EditExercise: React.FC = () => {
             </IonRow>}
             <IonRow>
               <IonCol></IonCol>
-              <IonCol><IonButton color='blue' onClick={() => setSets([])} routerLink='/CalendarDay'>Back</IonButton></IonCol>
-              {sets.length < 6 && <IonCol><IonButton color='blue' onClick={() => setSets(sets => [...sets, {'weight' : 0, 'reps' : 0}])}>Add Set</IonButton></IonCol>}
-              <IonCol><IonButton color='blue' onClick={() => Save()} routerLink='/CalendarDay'>Save Exercise</IonButton></IonCol>
+              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets([])} routerLink='/CalendarDay'>Back</IonButton></IonCol>
+              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets(sets => [...sets, {'weight' : 0, 'reps' : 0}])} disabled={sets.length >= 6}>Add Set</IonButton></IonCol>
+              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets(sets.slice(0, sets.length-1))} disabled={sets.length <= 1}>Remove Set</IonButton></IonCol>
+              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => Save()} routerLink='/CalendarDay'>Save Exercise</IonButton></IonCol>
               <IonCol></IonCol>
             </IonRow>
           </IonGrid>
