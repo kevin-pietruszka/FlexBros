@@ -1,6 +1,7 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonFooter,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
@@ -14,8 +15,9 @@ import { IonReactRouter } from '@ionic/react-router';
 // page imports for routing
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
-import Tab1 from './pages/Calendar';
+import Calendar from './pages/Calendar';
 import Routines from './pages/Routines';
+import RoutineMaker from './pages/RoutineMaker';
 import ExercisesStats from './pages/ExercisesStats';
 import EditWorkout from './pages/EditWorkout';
 import CreateWorkout from './pages/CreateWorkout';
@@ -63,7 +65,7 @@ const App: React.FC = () => (
             <CreateAccount />
           </Route>
           <Route exact path="/tab1">
-            <Tab1 />
+            <Calendar />
           </Route>
           <Route exact path="/tab2">
             <Routines />
@@ -77,9 +79,9 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route exact path="/RoutineMaker">
+          {/* <Route exact path="/RoutineMaker">
             <RoutineMaker />
-          </Route>
+          </Route> */}
           <Route exact path="/EditWorkout">
             <EditWorkout />
           </Route>
@@ -107,12 +109,14 @@ const App: React.FC = () => (
             <IonLabel>Progress</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab4" href="/tab4">
-            <IonIcon src={settings_icon}>progress</IonIcon>
+            <IonIcon src={progress_icon}>progress</IonIcon>
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
-        </IonTabBar>
+        </IonTabBar> 
       </IonTabs>
     </IonReactRouter>
+    <IonFooter id="banner_ad" slot="bottom">
+    </IonFooter>
   </IonApp>
 );
 
