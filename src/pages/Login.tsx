@@ -1,58 +1,91 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton } from '@ionic/react';
-import { useState } from 'react';
-import './Global.css'
+import {
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    IonList,
+    IonItem,
+    IonInput,
+    IonButton,
+} from "@ionic/react";
+import { useEffect, useState } from "react";
+import "./Global.css";
 
 /* Firebase imports */
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase';
+import { auth } from "../firebase";
+import { useHistory } from "react-router";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    let history = useHistory();
 
-  const login  = async () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        // ...
-        console.log('login success')
-      })
-      .catch((error) => {
-        console.log(error)
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-  };
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle class="ion-text-center">Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Login</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonList>
-          <IonItem>
-            <IonInput placeholder="Email" onIonInput={(e:any) => setEmail(e.target.value)}></IonInput>
-          </IonItem>
-          <IonItem>
-            <IonInput type="password" placeholder="Password" onIonInput={(e:any) => setPassword(e.target.value)}></IonInput>
-          </IonItem>
-          <IonItem>
-            <IonButton color="blue" id="login_button" onClick={() => login()} routerLink='/Tab1'>Login</IonButton> 
-            <IonButton color="blue" id="create_account_button" routerLink='/CreateAccount'>Create Account</IonButton>
-          </IonItem>
-        </IonList>
-      </IonContent>
-    </IonPage>
-  );
+    useEffect(() => {
+        return () => {};
+    }, [email, password]);
+
+    const login = async () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                console.log("login success");
+                history.push('/tab1');
+            })
+            .catch((error) => {
+                alert('Retry login');
+                console.log(error);
+            });
+    };
+
+    return (
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle class="ion-text-center">Login</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent fullscreen>
+                <IonHeader collapse="condense">
+                    <IonToolbar>
+                        <IonTitle size="large">Login</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
+                <IonList>
+                    <IonItem>
+                        <IonInput
+                            placeholder="Email"
+                            onIonInput={(e: any) => setEmail(e.target.value)}
+                        ></IonInput>
+                    </IonItem>
+                    <IonItem>
+                        <IonInput
+                            type="password"
+                            placeholder="Password"
+                            onIonInput={(e: any) => setPassword(e.target.value)}
+                        ></IonInput>
+                    </IonItem>
+                    <IonItem>
+                        <IonButton
+                            color="blue"
+                            id="login_button"
+                            onClick={() => login()}
+                        >
+                            Login
+                        </IonButton>
+                        <IonButton
+                            color="blue"
+                            id="create_account_button"
+                            onClick={(e:any) => {history.push('/CreateAccount')}}
+                        >
+                            Create Account
+                        </IonButton>
+                    </IonItem>
+                </IonList>
+            </IonContent>
+        </IonPage>
+    );
 };
 
 export default Login;

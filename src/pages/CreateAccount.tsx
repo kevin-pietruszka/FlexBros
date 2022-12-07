@@ -15,8 +15,11 @@ import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initNewUser } from "../db";
+import { useHistory } from "react-router";
 
 const CreateAccount: React.FC = () => {
+    let history = useHistory();
+
     const [email, setEmail] = useState("");
     const [password1, setPassword1] = useState("");
     const [password2, setPassword2] = useState("");
@@ -48,8 +51,11 @@ const CreateAccount: React.FC = () => {
                     // Signed in
                     const user = userCredential.user;
                     initNewUser(user.uid);
+
+                    history.push("/tab1");
                 })
                 .catch((error) => {
+                    alert("Please try again");
                     console.log(error);
                 });
         } else {
@@ -101,10 +107,7 @@ const CreateAccount: React.FC = () => {
                             }
                         ></IonInput>
                     </IonItem>
-                    <IonButton
-                        onClick={() => createAccount()}
-                        routerLink="/Login"
-                    >
+                    <IonButton onClick={(e: any) => createAccount()}>
                         Create
                     </IonButton>
                 </IonList>
