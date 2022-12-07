@@ -6,6 +6,8 @@ import './Global.css'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
 
+var uid : string
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,8 +17,10 @@ const Login: React.FC = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        uid = user.uid
         // ...
         console.log('login success')
+        console.log(uid)
       })
       .catch((error) => {
         console.log(error)
@@ -55,4 +59,5 @@ const Login: React.FC = () => {
   );
 };
 
+export function getUID() { return uid }
 export default Login;
