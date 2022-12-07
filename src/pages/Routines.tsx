@@ -1,42 +1,79 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton, IonCard, IonItem } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import {
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    IonList,
+    IonButton,
+    IonCard,
+    IonItem,
+    IonProgressBar,
+} from "@ionic/react";
+import { useEffect, useState } from "react";
+import { getsUsersRoutines } from "../db";
+import { auth } from "../firebase";
+import RoutineMaker from "./RoutineMaker";
 
 const Routines: React.FC = () => {
+    const [userID, setUserID] = useState("");
+    const [userRoutines, setUserRoutines] = useState([""]);
+    const [loadingRoutines, setLoadingRoutines] = useState(true);
 
-  // TODO
-  // Read and display routines from user id
-  //   call readRoutines from db.ts with user id   
-  
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle class="ion-text-center">Routines</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Routines</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonCard>
-          <IonList>
-            <IonItem>
-              <IonTitle>Routine list</IonTitle>
-            </IonItem>
-            <IonItem>
-              <IonContent>Some routine</IonContent>
-              <IonButton id="activate_button">Activate</IonButton>
-            </IonItem>
-          </IonList>
-        </IonCard>
-        <IonList>
-            <IonButton id="add_route_button" routerLink="/RoutineMaker">Add a routine</IonButton>
-        </IonList>
-      </IonContent>
-    </IonPage>
-  );
+    useEffect(() => {
+        if (auth.currentUser != null) {
+            setUserID(auth.currentUser.uid);
+        } else {
+            setUserID("A4A2aPnIz2VH39FsbGkPwZnzYM43");
+        }
+    }, []);
+
+    useEffect(() => {
+        getsUsersRoutines(userID).then((res) => {
+            setUserRoutines([...res]);
+        });
+    }, [userID]);
+
+    useEffect(() => {
+        setLoadingRoutines(false);
+    }, [userRoutines]);
+
+    return (
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle class="ion-text-center">Routines</IonTitle>
+                    {loadingRoutines && (
+                        <IonProgressBar type="indeterminate"></IonProgressBar>
+                    )}
+                </IonToolbar>
+            </IonHeader>
+            <IonContent fullscreen>
+                <IonContent>
+                    <IonHeader collapse="condense">
+                        <IonToolbar>
+                            <IonTitle size="large">Routines</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+                    <IonCard>
+                        <IonList>
+                            <IonItem>
+                                <IonTitle>Routine list</IonTitle>
+                            </IonItem>
+                            {!loadingRoutines && (
+                                userRoutines.map((val, index) => {
+                                    return (
+                                        <IonItem key={index}> {val} </IonItem>
+                                    );
+                                })
+                            )}
+                        </IonList>
+                    </IonCard>
+                    <RoutineMaker uid={userID}/>
+                </IonContent>
+            </IonContent>
+        </IonPage>
+    );
 };
 
 export default Routines;

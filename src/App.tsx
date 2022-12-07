@@ -79,9 +79,9 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route exact path="/RoutineMaker">
+          {/* <Route exact path="/RoutineMaker">
             <RoutineMaker />
-          </Route>
+          </Route> */}
           <Route exact path="/EditWorkout">
             <EditWorkout />
           </Route>
