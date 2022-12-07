@@ -149,12 +149,12 @@ const EditExercise: React.FC = () => {
               </IonCol>
             </IonRow>}
             <IonRow>
-              <IonCol></IonCol>
-              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets([])} routerLink='/CalendarDay'>Back</IonButton></IonCol>
               <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets(sets => [...sets, {'weight' : 0, 'reps' : 0}])} disabled={sets.length >= 6}>Add Set</IonButton></IonCol>
-              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets(sets.slice(0, sets.length-1))} disabled={sets.length <= 1}>Remove Set</IonButton></IonCol>
+              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets(sets.slice(0, sets.length-1))} disabled={sets.length <= 1}>Remove Set</IonButton></IonCol>              
+            </IonRow>
+            <IonRow>
+              <IonCol><IonButton id='exercise_button' color='blue' onClick={() => setSets([])} routerLink='/CalendarDay'>Back</IonButton></IonCol>
               <IonCol><IonButton id='exercise_button' color='blue' onClick={() => Save()} routerLink='/CalendarDay'>Save Exercise</IonButton></IonCol>
-              <IonCol></IonCol>
             </IonRow>
           </IonGrid>
         </IonCard>
